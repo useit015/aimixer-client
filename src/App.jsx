@@ -11,6 +11,12 @@ function App() {
 
     console.log('login',login);
 
+
+    // get list of available servers
+
+
+
+
     const handleResize = () => {
        setScreenWidth(window.innerWidth)
     }
@@ -20,7 +26,7 @@ function App() {
         window.addEventListener('resize', handleResize)
     }
 
-    if (!login.isLoggedIn) return <Login />
+    //if (!login.isLoggedIn) return <Login />
 
     if (screenWidth <= 786) return <MobileApp /> 
     else return <DesktopApp />
