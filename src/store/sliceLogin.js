@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const loginSlice = createSlice({
     name: 'login',
-    initialState: {isLoggedIn: false, username: '', password: '', token: '', accountId: ''},
+    initialState: {mode: 'login', isLoggedIn: false, username: '', password: '', token: '', accountId: ''},
     reducers: {
         loginSetIsLoggedIn: (state, action) => {
             const newState = !state.isLoggedIn;

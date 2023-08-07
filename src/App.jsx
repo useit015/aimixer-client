@@ -26,7 +26,7 @@ function App() {
         window.addEventListener('resize', handleResize)
     }
 
-    //if (!login.isLoggedIn) return <Login />
+    if (!login.isLoggedIn) return <Login />
 
     if (screenWidth <= 786) return <MobileApp /> 
     else return <DesktopApp />

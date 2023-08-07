@@ -1,0 +1,29 @@
+.Login {
+    &__Container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__Modal {
+        padding: 1.5rem 1rem;
+        border: 1px solid var(--ion-color-primary);
+        border-radius: 8px;
+    }
+    &__Title {
+        text-align: center;
+        color: var(--ion-color-primary);
+        margin-top: 0;
+    }
+    &__Input {
+        width: 80vw;
+        margin-bottom: .5rem;
+    }
+    &__Submit-Button {
+        display: block;
+        margin: 1rem auto;
+        width: 6rem;
+    }
+
+}
