@@ -14,18 +14,31 @@
         left: 0;
     }
     &__Modal {
-        padding: 1.5rem 1rem;
-        border: 1px solid var(--ion-color-primary);
-        border-radius: 8px;
+        padding: .5rem .25rem;
+        @media screen and (min-width: 786px) {
+            padding: 1.5rem 1rem;
+            border: 1px solid var(--ion-color-primary);
+            border-radius: 8px;
+        }
     }
     &__Title {
+        padding-top: 1.5rem;
         text-align: center;
         color: var(--ion-color-primary);
         margin-top: 0;
+
+        @media screen and (min-width: 786px) {
+            padding-top: 0;
+        }
     }
     &__Input {
         width: 80vw;
-        margin-bottom: 1rem;
+        max-width: 900px;
+        margin: 0;
+
+        @media screen and (min-width: 786px) {
+            margin-bottom: 1rem;
+        }
     }
     &__Submit-Button {
         display: block;
