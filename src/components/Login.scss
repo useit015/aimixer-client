@@ -1,7 +1,10 @@
 .Login {
+    
     &__Heading {
         font-size: 2rem;
         text-align: center;
+        z-index: 10;
+        position: relative;
     }
     &__Container {
         width: 100vw;
@@ -12,6 +15,10 @@
         position: fixed;
         top: 0;
         left: 0;
+        background-image:url('../assets/images/bowl-001.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     &__Modal {
         padding: .5rem .25rem;
