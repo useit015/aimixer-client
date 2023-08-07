@@ -24,8 +24,8 @@
         padding: .5rem .25rem;
         @media screen and (min-width: 786px) {
             padding: 1.5rem 1rem;
-            border: 1px solid var(--ion-color-primary);
-            border-radius: 8px;
+            // border: 1px solid var(--ion-color-primary);
+            // border-radius: 8px;
         }
     }
     &__Title {
@@ -46,6 +46,11 @@
         @media screen and (min-width: 786px) {
             margin-bottom: 1rem;
         }
+    }
+    &__Checkbox {
+        display: block;
+        margin: 1rem auto;
+        width: fit-content;
     }
     &__Submit-Button {
         display: block;
