@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import loginReducer from './sliceLogin'
+import loginReducer from './sliceLogin';
+import toastReducer from './sliceToast';
 
 const store = configureStore({ 
     reducer: {
-       login: loginReducer
+       login: loginReducer,
+       toast: toastReducer
     }
 });
 
