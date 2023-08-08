@@ -1,3 +1,5 @@
+//https://ionicframework.com/docs/components
+
 import React, { useState } from 'react';
 import MobileApp from './MobileApp'
 import DesktopApp from './DesktopApp';
@@ -8,9 +10,6 @@ function App() {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const login = useSelector(state => state.login);
-
-    console.log('login',login);
-
 
     // get list of available servers
 
