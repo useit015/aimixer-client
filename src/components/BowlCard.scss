@@ -1,0 +1,29 @@
+.BowlCard {
+    
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 4px;
+    margin: 1rem;
+    min-width: 250px;
+    width: 25%;
+    cursor: pointer;
+
+    &__Name {
+        text-align: center;
+        margin: 0;
+    }
+    &__Creator {
+        font-style: italic;
+        text-align: center;
+    }
+    &__FillButton {
+        margin: .5rem auto 0 auto;
+        display: block;
+        padding: .25rem .5rem;
+        width: fit-content;
+    }
+    &__Action-Container {
+        display: flex;
+        justify-content: space-between;
+        padding: .25rem;
+    }
+}

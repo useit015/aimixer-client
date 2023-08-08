@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Login from './components/Login';
 import { IonApp, IonButton, IonContent, IonPage, IonToast, useIonToast } from '@ionic/react';
 import { toastSetIsOpen, toastSetMessage } from './store/sliceToast';
-import Logo from './assets/images/logo/png/logo-black.png';
+import Logo from './assets/images/logo/svg/logo-no-background.svg';
 import Bowls from './components/Bowls';
 
 const DesktopApp = () => {
@@ -20,7 +20,7 @@ const DesktopApp = () => {
     <IonApp>
       <IonPage>
         <IonContent>
-          {/* <img className='DesktopApp__Logo' src={Logo} /> */}
+          <img className='DesktopApp__Logo' src={Logo} />
           {!login.isLoggedIn && <Login /> }
           {login.mode === 'bowls' && <Bowls />}
           <IonToast

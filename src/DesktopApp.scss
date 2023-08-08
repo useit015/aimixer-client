@@ -10,8 +10,9 @@ body {
 
 .DesktopApp {
     &__Logo {
-        position: fixed;
-        height: 20rem;
-        z-index: 100000 !important
+        height: 3rem;
+        z-index: 100000 !important;
+        display: block;
+        margin: 1rem auto;
     }
 }

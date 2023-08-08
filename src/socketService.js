@@ -11,14 +11,43 @@ export const setupTheSocket = (socketio, url, store) => {
     })
    })
 
-   socket.on('test', msg => {
-    console.log('test',msg);
-    // store.dispatch(toast.toastSet({position: 'middle', message: msg, color: 'danger'}));
+   socket.on('alert', msg => {
     store.dispatch({
         type: 'toast/toastSet',
-        payload: msg
+        payload: {
+            position: 'middle',
+            message: msg,
+            color: 'danger'
+        }
     })
    })
+
+   socket.on('message', msg => {
+    store.dispatch({
+        type: 'toast/toastSet',
+        payload: {
+            position: 'middle',
+            message: msg,
+            color: 'primary'
+        }
+    })
+   })
+
+   socket.on('addBowl', bowl => {
+    store.dispatch({
+        type: 'bowls/bowlsAddBowl',
+        payload: bowl
+    })
+   })
+
+   socket.on('setBowls', bowls => {
+        store.dispatch({
+            type: 'bowls/bowlsSetBowls',
+            payload: bowls
+        })
+   }) 
+
+   
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);
