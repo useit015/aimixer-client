@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const loginSlice = createSlice({
     name: 'login',
-    initialState: {mode: 'login', isLoggedIn: false, isCorporateAccount: false, email: '', username: '', password: '', confirmPassword: '', token: '', accountId: ''},
+    initialState: {mode: 'login', server: '', isLoggedIn: false, isCorporateAccount: false, email: '', username: '', password: '', confirmPassword: '', token: '', accountId: ''},
     reducers: {
         loginSetIsLoggedIn: (state, action) => {
             const newState = !state.isLoggedIn;
@@ -36,10 +36,20 @@ const loginSlice = createSlice({
         loginSetIsCorporateAccount: (state, action) => {
             state.isCorporateAccount = action.payload;
             return state;
+        },
+        loginSetToken: (state, action) => {
+            console.log('payload', JSON.stringify(action.payload));
+            const { token, server } = action.payload.payload;
+            console.log('ts', token, server);
+            state.token = token;
+            state.server = server;
+            state.isLoggedIn = true;
+            state.mode = 'bowls'
+            return state;
         }
     }
 });
 
-export const { loginSetIsLoggedIn, loginSetMode, loginSetUsername, loginSetPassword, loginSetEmail, loginSetConfirmPassword, loginSetAccountId, loginSetIsCorporateAccount } = loginSlice.actions;
+export const { loginSetIsLoggedIn, loginSetMode, loginSetUsername, loginSetPassword, loginSetEmail, loginSetConfirmPassword, loginSetAccountId, loginSetIsCorporateAccount, loginSetToken } = loginSlice.actions;
 
 export default loginSlice.reducer;

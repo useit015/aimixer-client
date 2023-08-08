@@ -15,17 +15,17 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-image:url('../assets/images/bowl-001.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        // background-image:url('../assets/images/bowl-001.jpg');
+        // background-position: center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
     }
     &__Modal {
         padding: .5rem .25rem;
         @media screen and (min-width: 786px) {
             padding: 1.5rem 1rem;
-            // border: 1px solid var(--ion-color-primary);
-            // border-radius: 8px;
+            border: 1px solid var(--ion-color-primary);
+            border-radius: 8px;
         }
     }
     &__Title {

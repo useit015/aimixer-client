@@ -7,3 +7,11 @@
 body {
     overflow-x: hidden;
 }
+
+.DesktopApp {
+    &__Logo {
+        position: fixed;
+        height: 20rem;
+        z-index: 100000 !important
+    }
+}

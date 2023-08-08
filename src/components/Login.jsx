@@ -2,7 +2,7 @@ import { IonButton, IonCheckbox, IonInput, IonItem } from '@ionic/react';
 import './Login.scss';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSetConfirmPassword, loginSetEmail, loginSetIsCorporateAccount, loginSetMode, loginSetPassword, loginSetUsername } from '../store/sliceLogin';
+import { loginSetConfirmPassword, loginSetEmail, loginSetIsCorporateAccount, loginSetMode, loginSetPassword, loginSetToken, loginSetUsername } from '../store/sliceLogin';
 import axios from 'axios';
 import { toastSet, toastSetIsOpen, toastSetMessage } from '../store/sliceToast';
 import * as EmailValidator from 'email-validator';
@@ -23,12 +23,42 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const loginUser = () => {
+    const { username, password } = login;
+
+    if (!username) return dispatch(toastSet({position: 'middle', message: 'Username Required', color: 'danger'}))
+    if (!password) return dispatch(toastSet({position: 'middle', message: 'Password Required', color: 'danger'}))
+   
+    const request = {
+      url: `https://account.aimixer.io:5001/login`,
+      method: 'post',
+      data: {
+        username, password
+      }
+    }
+    axios(request)
+    .then(response => {
+      const { status } = response.data;
+      if (status === 'error') return dispatch(toastSet({position: 'middle', message: msg, color: 'danger'}));
+      if (status === 'expired') {
+        dispatch(toastSet({position: 'middle', message: 'Account has expired.', color: 'danger'}));
+        setTimeout(() => {
+          dispatch(loginSetMode('purchase'))
+        }, 5000);
+        return;
+      }
+      const { token, server } = response.data;
+      console.log('token and server', token, server);
+      // connect to server
+      dispatch(loginSetToken(loginSetToken({token, server})));
+    })
+    .catch(err => {
+      console.error(err);
+    })
 
   }
 
   const registerUser = () => {
    
-    
     const { username, password, confirmPassword, email, isCorporateAccount } = login;
 
     if (!email) return dispatch(toastSet({position: 'middle', message: 'Email Required', color: 'danger'}))
@@ -68,7 +98,6 @@ const Login = () => {
 
   return (
     <div className='Login'>
-      <h1 className='Login__Heading'>AI Mixer</h1>
       <div className='Login__Container'>
         <div className="Login__Modal">
           {login.mode === 'login' && <h1 className="Login__Title">Login</h1>}

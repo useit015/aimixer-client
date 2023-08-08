@@ -2,11 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import loginReducer from './sliceLogin';
 import toastReducer from './sliceToast';
 
-const store = configureStore({ 
+export const store = configureStore({ 
     reducer: {
        login: loginReducer,
        toast: toastReducer
     }
 });
 
-export default store;
+export default store
