@@ -7,6 +7,7 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonToast,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -70,6 +71,7 @@ const MobileApp: React.FC = () => (
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
+    
   </IonApp>
 );
 

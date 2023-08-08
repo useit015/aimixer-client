@@ -4,10 +4,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSetConfirmPassword, loginSetEmail, loginSetIsCorporateAccount, loginSetMode, loginSetPassword, loginSetUsername } from '../store/sliceLogin';
 import axios from 'axios';
+import { toastSet, toastSetIsOpen, toastSetMessage } from '../store/sliceToast';
 
 const Login = () => {
 
   const login = useSelector(state => state.login);
+  const toast = useSelector(state => state.toast);
 
   let domain;
   if (!login.email) domain = '';
@@ -24,6 +26,8 @@ const Login = () => {
   }
 
   const registerUser = () => {
+    dispatch(toastSet({position: 'middle', message: 'hola'}))
+    
     const { username, password, email, isCorporateAccount } = login;
     const request = {
       url: `https://account.aimixer.io:5001/register`,
