@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginSetConfirmPassword, loginSetEmail, loginSetIsCorporateAccount, loginSetMode, loginSetPassword, loginSetUsername } from '../store/sliceLogin';
 import axios from 'axios';
 import { toastSet, toastSetIsOpen, toastSetMessage } from '../store/sliceToast';
+import * as EmailValidator from 'email-validator';
 
 const Login = () => {
 
@@ -26,9 +27,16 @@ const Login = () => {
   }
 
   const registerUser = () => {
-    dispatch(toastSet({position: 'middle', message: 'hola'}))
+   
     
-    const { username, password, email, isCorporateAccount } = login;
+    const { username, password, confirmPassword, email, isCorporateAccount } = login;
+
+    if (!email) return dispatch(toastSet({position: 'middle', message: 'Email Required', color: 'danger'}))
+    if (!EmailValidator.validate(email)) return dispatch(toastSet({position: 'middle', message: 'Invalid Email', color: 'danger'}))
+    if (!username) return dispatch(toastSet({position: 'middle', message: 'Username Required', color: 'danger'}))
+    if (!password) return dispatch(toastSet({position: 'middle', message: 'Password Required', color: 'danger'}))
+    if (password !== confirmPassword) return  dispatch(toastSet({position: 'middle', message: 'Passwords do not match', color: 'danger'}))
+
     const request = {
       url: `https://account.aimixer.io:5001/register`,
       method: 'post',
