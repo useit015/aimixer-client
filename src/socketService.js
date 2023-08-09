@@ -64,6 +64,33 @@ export const setupTheSocket = (socketio, url, store) => {
         })
     });
 
+    socket.on('changeBowlOutput', ({id, output}) => {
+        store.dispatch({
+            type: 'bowls/bowlsChangeBowlOutput',
+            payload: {
+                id, output
+            }
+        })
+    });
+
+    socket.on('changeBowlLength', ({id, length}) => {
+        store.dispatch({
+            type: 'bowls/bowlsChangeBowlLength',
+            payload: {
+                id, length
+            }
+        })
+    });
+
+    socket.on('changeBowlSource', ({id, source}) => {
+        store.dispatch({
+            type: 'bowls/bowlsChangeBowlSource',
+            payload: {
+                id, source
+            }
+        })
+    });
+
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);

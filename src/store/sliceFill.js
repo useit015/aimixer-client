@@ -2,41 +2,49 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const outputs = [
-    {id: 'out00', name: 'News Article'},
-    {id: 'out01', name: 'Blog Post'},
-    {id: 'out02', name: 'Landing Page'},
-    {id: 'out03', name: 'Sales Email'},
-    {id: 'out04', name: 'Product Description'},
+    {id: 'newsArticle', name: 'News Article'},
+    {id: 'blogPost', name: 'Blog Post'},
+    {id: 'landingPage', name: 'Landing Page'},
+    {id: 'salesEmail', name: 'Sales Email'},
+    {id: 'productDescription', name: 'Product Description'},
 ]
 
 const lengths = [
-    {id: 'len00', name: "Concise"},
-    {id: 'len01', name: "Short Form"},
-    {id: 'len02', name: 'Long Form'},
-    {id: 'len03', name: 'Exhaustive'}
+    {id: 'concise', name: "Concise"},
+    {id: 'shortForm', name: "Short Form"},
+    {id: 'longForm', name: 'Long Form'},
+    {id: 'exhaustive', name: 'Exhaustive'}
+]
+
+const sources = [
+    {id: 'googleSearch', name: "Google Search"},
+    {id: 'siteSearch', name: "Site Search"},
+    {id: 'link', name: 'Link'},
+    {id: 'file', name: 'File'},
+    {id: 'aiMixerAsset', name: 'AI Mixer Asset'}
 ]
 
 const fillSlice = createSlice({
     name: 'fill',
-    initialState: {currentBowl: '', outputs, curOutput: 'out00', lengths, curLength: 'len02'},
+    initialState: {currentBowl: '', outputs, lengths, sources},
     reducers: {
         fillSetCurrentBowl: (state, action) => {
             const id = action.payload;
             state.currentBowl = id;
             return state;
         },
-        fillChangeCurOutput: (state, action) => {
-            state.curOutput = action.payload;
-            return state;
-        },
         fillChangeCurLength: (state, action) => {
             state.curLength = action.payload;
+            return state;
+        },
+        fillChangeCurSource: (state, action) => {
+            state.curSource = action.payload;
             return state;
         }
        
     }
 });
 
-export const { fillSetCurrentBowl, fillChangeCurOutput  } = fillSlice.actions;
+export const { fillSetCurrentBowl, fillChangeCurOutput, fillChangeCurLength, fillChangeCurSource  } = fillSlice.actions;
 
 export default fillSlice.reducer;

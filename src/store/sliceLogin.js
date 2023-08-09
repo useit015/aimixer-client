@@ -39,10 +39,14 @@ const loginSlice = createSlice({
         },
         loginSetToken: (state, action) => {
             console.log('payload', JSON.stringify(action.payload));
-            const { token, server } = action.payload.payload;
+            const { token, server, email, domain, username, accountId } = action.payload.payload;
             console.log('ts', token, server);
             state.token = token;
             state.server = server;
+            state.email = email;
+            state.domain = domain;
+            state.username = username;
+            state.accountId = accountId;
             state.isLoggedIn = true;
             state.mode = 'bowls'
             return state;

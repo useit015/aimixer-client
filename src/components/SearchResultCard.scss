@@ -1,0 +1,30 @@
+.SearchResultCard {
+    width: 30%;
+    min-width: 275;
+    padding: .5rem .75rem;
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__Title {
+        height: 9.5rem;
+        text-decoration: none;
+        color: black;
+        font-size: 1.25rem;
+    }    
+    &__Date {
+        margin: .75rem auto;
+        height: 1.25rem;
+        
+    }
+    &__Select-Button {
+        display: block;
+        margin: auto;
+        width: fit-content;
+        align-self: flex-end;
+        height: 2.5rem;
+    }
+}

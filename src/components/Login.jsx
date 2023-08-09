@@ -46,10 +46,10 @@ const Login = () => {
         }, 5000);
         return;
       }
-      const { token, server } = response.data;
+      const { token, server, username, email, accountId, domain } = response.data;
       console.log('token and server', token, server);
       // connect to server
-      dispatch(loginSetToken(loginSetToken({token, server})));
+      dispatch(loginSetToken(loginSetToken({token, server, username, email, accountId, domain})));
     })
     .catch(err => {
       console.error(err);

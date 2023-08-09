@@ -27,6 +27,30 @@ const bowlsSlice = createSlice({
                 bowl.name = name;
                 return state;
             }
+        },
+        bowlsChangeBowlOutput: (state, action) => {
+            const { id, output} = action.payload;
+            const bowl = state.find(s => s.id === id)
+            if (bowl) {
+                bowl.output = output;
+                return state;
+            }
+        },
+        bowlsChangeBowlLength: (state, action) => {
+            const { id, length} = action.payload;
+            const bowl = state.find(s => s.id === id)
+            if (bowl) {
+                bowl.length = length;
+                return state;
+            }
+        },
+        bowlsChangeBowlSource: (state, action) => {
+            const { id, source} = action.payload;
+            const bowl = state.find(s => s.id === id)
+            if (bowl) {
+                bowl.source = source;
+                return state;
+            }
         }
     }
 });

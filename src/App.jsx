@@ -19,7 +19,7 @@ function App() {
         window.addEventListener('resize', handleResize)
     }
 
-    if (screenWidth <= 786) return <MobileApp /> 
+    if (screenWidth <= 0) return <MobileApp /> 
     else return <DesktopApp />
 }
 
