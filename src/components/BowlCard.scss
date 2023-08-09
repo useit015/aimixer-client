@@ -10,6 +10,15 @@
     &__Name {
         text-align: center;
         margin: 0;
+        font-size: 1.5rem;
+    }
+    &__Input-Name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 90%;
+        display: block;
+        margin: auto;
+        text-align: center;
     }
     &__Creator {
         font-style: italic;

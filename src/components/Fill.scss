@@ -1,0 +1,15 @@
+.Fill {
+    max-width: 900px;
+    display: block;
+    margin: 1.5rem auto 0 auto;
+    
+    &__Title {
+        color: var(--ion-color-primary);
+        text-align: center;
+    }
+    &__Button-Change-Bowl {
+        display: block;
+        margin: auto;
+        width: fit-content
+    }
+}

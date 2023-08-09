@@ -45,9 +45,25 @@ export const setupTheSocket = (socketio, url, store) => {
             type: 'bowls/bowlsSetBowls',
             payload: bowls
         })
-   }) 
+   });
 
-   
+   socket.on('deleteBowl', id => {
+        console.log('deleteBowl event', id);
+        store.dispatch({
+            type: 'bowls/bowlsDeleteBowl',
+            payload: id
+        })
+    });
+
+    socket.on('changeBowlName', ({id, name}) => {
+        store.dispatch({
+            type: 'bowls/bowlsChangeBowlName',
+            payload: {
+                id, name
+            }
+        })
+    });
+
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);

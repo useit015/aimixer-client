@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Ionic App</title>
+  <title>AI Mixer</title>
 
   <base href="/" />
 
@@ -15,14 +15,14 @@
 
   <link rel="manifest" href="/manifest.json" />
 
-  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="data:image/png;base64,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" />
 
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Ionic App" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <script type="module" crossorigin src="/assets/index-b184e746.js"></script>
-  <link rel="stylesheet" href="/assets/index-fa4af252.css">
+  <script type="module" crossorigin src="/assets/index-c527d7bd.js"></script>
+  <link rel="stylesheet" href="/assets/index-64c9e438.css">
   <script type="module">import.meta.url;import("_").catch(()=>1);async function* g(){};if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
   <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 </head>
@@ -32,7 +32,7 @@
   
   <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
   <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-fd1be22f.js"></script>
-  <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-b775df54.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+  <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-c6a045a4.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
 </body>
 
 </html>

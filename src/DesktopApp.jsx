@@ -6,6 +6,7 @@ import { IonApp, IonButton, IonContent, IonPage, IonToast, useIonToast } from '@
 import { toastSetIsOpen, toastSetMessage } from './store/sliceToast';
 import Logo from './assets/images/logo/svg/logo-no-background.svg';
 import Bowls from './components/Bowls';
+import Fill from './components/Fill';
 
 const DesktopApp = () => {
 
@@ -23,6 +24,7 @@ const DesktopApp = () => {
           <img className='DesktopApp__Logo' src={Logo} />
           {!login.isLoggedIn && <Login /> }
           {login.mode === 'bowls' && <Bowls />}
+          {login.mode === 'fill' && <Fill />}
           <IonToast
               isOpen={toast.isOpen}
               message={toast.message}
