@@ -14,6 +14,7 @@ function Fill() {
 
     const curBowl = bowls.find(b => b.id == fill.currentBowl);
     const curOutput = fill.outputs.find(o => o.id === fill.curOutput);
+    const curLength = fill.lengths.find(o => o.id === fill.curLength);
 
     console.log('FillPage', fill, curBowl);
   return (
@@ -26,6 +27,17 @@ function Fill() {
           dispatch(fillChangeCurOutput(e.detail.value))
         }}>
           {fill.outputs.map(o => {
+            return <IonSelectOption key={o.id} value={o.id}>{o.name}</IonSelectOption>
+          })}
+    
+        </IonSelect>
+      </IonItem>
+      <IonItem>
+        <IonSelect label="Length" placeholder={curLength.name} value={curLength.id} onIonChange={(e) => {
+          console.log(e.detail.value);
+          dispatch(fillChangeCurLength(e.detail.value))
+        }}>
+          {fill.lengths.map(o => {
             return <IonSelectOption key={o.id} value={o.id}>{o.name}</IonSelectOption>
           })}
     

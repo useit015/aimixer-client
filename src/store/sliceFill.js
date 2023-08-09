@@ -9,10 +9,16 @@ const outputs = [
     {id: 'out04', name: 'Product Description'},
 ]
 
+const lengths = [
+    {id: 'len00', name: "Concise"},
+    {id: 'len01', name: "Short Form"},
+    {id: 'len02', name: 'Long Form'},
+    {id: 'len03', name: 'Exhaustive'}
+]
 
 const fillSlice = createSlice({
     name: 'fill',
-    initialState: {currentBowl: '', outputs, curOutput: 'out00'},
+    initialState: {currentBowl: '', outputs, curOutput: 'out00', lengths, curLength: 'len02'},
     reducers: {
         fillSetCurrentBowl: (state, action) => {
             const id = action.payload;
@@ -21,6 +27,10 @@ const fillSlice = createSlice({
         },
         fillChangeCurOutput: (state, action) => {
             state.curOutput = action.payload;
+            return state;
+        },
+        fillChangeCurLength: (state, action) => {
+            state.curLength = action.payload;
             return state;
         }
        
