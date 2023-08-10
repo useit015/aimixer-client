@@ -5,6 +5,17 @@
         position: relative;
         margin-right: 1.5rem;
     }
+    &__Radio-Labels {
+        display: inline-block;
+        margin-left: -.5rem;
+        margin-right: 0rem;
+        vertical-align: middle;
+
+        @media screen and (min-width: 325px) {
+            margin-left: -1.25rem;
+            margin-right: 1rem;
+        }
+    }
     &__Submit-Button {
         display: block;
         width: fit-content;

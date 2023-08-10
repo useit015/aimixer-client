@@ -18,10 +18,11 @@ const lengths = [
 
 const sources = [
     {id: 'googleSearch', name: "Google Search"},
-    {id: 'siteSearch', name: "Site Search"},
     {id: 'link', name: 'Link'},
     {id: 'file', name: 'File'},
-    {id: 'aiMixerAsset', name: 'AI Mixer Asset'}
+    {id: 'text', name: 'Text'},
+    {id: 'aiMixerAsset', name: 'AI Mixer Asset'},
+    
 ]
 
 const fillSlice = createSlice({

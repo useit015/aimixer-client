@@ -13,6 +13,11 @@ body {
         height: 3rem;
         z-index: 100000 !important;
         display: block;
-        margin: 1rem auto;
+        margin: 1rem auto .5rem auto;
+    }
+    &__Catch-Phrase {
+        text-align: center;
+        //font-weight: bold;
+        font-style: italic;
     }
 }

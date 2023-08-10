@@ -51,10 +51,40 @@ const bowlsSlice = createSlice({
                 bowl.source = source;
                 return state;
             }
+        },
+        bowlsAddContent: (state, action) => {
+            const { id, content} = action.payload;
+            const bowl = state.find(s => s.id === id)
+            if (bowl) {
+                bowl.contents.push(content);
+                return state;
+            }
+        },
+        bowlsChangeContentDate: (state, action) => {
+            const { bowlId, contentId, date} = action.payload;
+            const bowl = state.find(s => s.id === bowlId)
+            if (bowl) {
+                const test = bowl.contents.find(c => c.id === contentId);
+                if (test) test.date = date;
+                return state;
+            }
+        },
+        bowlsSetInfo: (state, action) => {
+            const { bowlId, info } = action.payload;
+            const bowl = state.find(s => s.id === bowlId);
+            if (bowl) {
+                for (let i = 0; i < info.length; ++i) {
+                    const content = bowl.contents[i];
+                    if (!content) continue;
+                    content.infoLink = info[i].infoLink;
+                    content.infoLength = info[i].infoLength;
+                }
+                return state;
+            }
         }
     }
 });
 
-export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl  } = bowlsSlice.actions;
+export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl, bowlsChangeContentDate, bowlsSetInfo  } = bowlsSlice.actions;
 
 export default bowlsSlice.reducer;

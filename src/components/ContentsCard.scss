@@ -1,0 +1,27 @@
+.ContentsCard {
+    margin-top: 1rem;
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 4px;
+    margin-bottom: .5rem;
+    padding: .5rem 1rem;
+
+    &__Num-Words {
+        margin: 0 auto;
+        display: block;
+        width: fit-content;
+        font-style: italic;
+
+    }
+    &__Title {
+        margin: 0 0 .75rem 0;
+    }
+    &__Action-Container {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__Date-Picker {
+        display: block;
+        margin: auto;
+    }
+    
+}

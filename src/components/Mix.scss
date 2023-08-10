@@ -1,21 +1,38 @@
-.Fill {
+.Mix {
     max-width: 900px;
     display: block;
     margin: 1.5rem auto 0 auto;
     position: relative;
-    
+
     &__Title {
         color: var(--ion-color-primary);
         text-align: center;
+        margin-bottom: 0;
     }
-    &__Button-Change-Bowl {
+    &__Subtitle {
+        display: block;
+        margin: 1.5rem auto 1rem auto;
+        width: fit-content;
+    }
+    &__Length {
+        //color: var(--ion-color-primary);
+        text-align: center;
+        margin-top: 0;
+        font-size: 1rem;
+        //font-style: italic;
+    }
+    &__Button-Mix {
         display: block;
         margin: auto;
         width: 9rem;
     }
-    &__Input {
-        margin-top: 1rem;
+    &__Button-Apply {
+        display: block;
+        margin: .5rem auto;
+        width: 9rem;
     }
+
+
     &__Num-Contents {
         position: fixed;
         top: 1rem;

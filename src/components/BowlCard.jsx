@@ -7,6 +7,7 @@ import * as socketService from '../socketService';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSetMode } from '../store/sliceLogin';
 import { fillSetCurrentBowl } from '../store/sliceFill';
+import { mixSetTopics } from '../store/sliceMix';
 
 function BowlCard({bowl}) {
   const [mode, setMode] = useState('display');
@@ -25,6 +26,7 @@ function BowlCard({bowl}) {
   const handleMainButton = () => {
     if (mode === 'display') {
       dispatch(fillSetCurrentBowl(bowl.id));
+      dispatch(mixSetTopics(''))
       dispatch(loginSetMode('fill'));
     } else {
       setName(bowl.name)

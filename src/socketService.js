@@ -91,6 +91,24 @@ export const setupTheSocket = (socketio, url, store) => {
         })
     });
 
+    socket.on('addContentToBowl', ({bowlId, content}) => {
+        store.dispatch({
+            type: 'bowls/bowlsAddContent',
+            payload: {
+                id: bowlId, content
+            }
+        })
+    });
+
+    socket.on('changeContentDate', ({bowlId, contentId, date}) => {
+        store.dispatch({
+            type: 'bowls/bowlsChangeContentDate',
+            payload: {
+                bowlId, contentId, date
+            }
+        })
+    });
+
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);

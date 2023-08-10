@@ -10,6 +10,7 @@ import SiteSearch from '../inputs/SiteSearch';
 import File from '../inputs/File';
 import Link from '../inputs/Link';
 import AIMixerAsset from '../inputs/AIMixerAsset';
+import Text from '../inputs/Text';
 
 function Fill() {
 
@@ -64,8 +65,14 @@ function Fill() {
       </IonItem>
 
       <div className="Fill__Input">
-        {curBowl.source === 'googleSearch' && <GoogleSearch />}
+        {curBowl.source === 'googleSearch' && <SiteSearch />}
+        
+        {curBowl.source === 'link' && <Link />}
+        {curBowl.source === 'text' && <Text />}
+        {curBowl.source === 'file' && <File />}
+        
       </div>
+      {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}>{curBowl.contents.length}</div> }
     </div>
   )
 }

@@ -62,12 +62,12 @@ function GoogleSearch() {
       </div>
       <div className="GoogleSearch__Time-Period">
         <IonRadioGroup value={timePeriod}>
-        <div style={{display: 'flex', justifyContent:'center', marginTop: '1rem'}}>
+        <div style={{display: 'flex', justifyContent:'center', margin: '1rem .5rem 0 .5rem'}}>
           {timePeriods.map(tp => {
             return (
               <div key={tp.id} style={{display: 'flex', justifyContent: 'center'}}>
                 <IonRadio className="GoogleSearch__Radio"  value={tp.id} aria-label="Custom checkbox" labelPlacement='end'></IonRadio>
-                <div style={{display: 'inline-block', marginLeft: '-1.25rem', marginRight: '1.5rem', verticalAlign: 'middle'}}>{tp.name}</div>
+                <div className='GoogleSearch__Radio-Labels'>{tp.name}</div>
               </div>
               )
             
