@@ -106,10 +106,22 @@ function Jodit() {
 
   const curBowl = bowls.find(b => b.id == fill.currentBowl);
 
+  const setTheContent = (data) => {
+    const paragraphs = data.split("\n");
+    for (let i = 0; i < paragraphs.length; ++i) {
+      if (paragraphs[i].endsWith('>')) continue;
+      paragraphs[i] = paragraphs[i]+'<br>';
+    }
+
+    data = paragraphs.join("\n");
+
+    setContent(data);
+  }
+
   const fetchContent = async () => {
     try {
       const response = await axios.get(curBowl.creations[0]);
-      setContent(response.data);
+      setTheContent(response.data);
     } catch (err) {
       console.error(err);
       

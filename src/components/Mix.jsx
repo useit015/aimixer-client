@@ -11,7 +11,6 @@ import { bowlsSetInfo } from '../store/sliceBowls';
 import * as socketService from '../socketService';
 
 function Mix() {
-
     const login = useSelector(state => state.login);
     const fill = useSelector(state => state.fill);
     const bowls = useSelector(state => state.bowls);
@@ -84,7 +83,6 @@ function Mix() {
                 return <ContentsCard key={c.id} content={c}/>
             })}
         </div>
-
 
         <div className='Mix__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}>{curBowl.contents.length}</div>
         {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> }

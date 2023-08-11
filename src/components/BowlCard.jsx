@@ -50,7 +50,7 @@ function BowlCard({bowl}) {
             const newMode = mode === 'display' ? 'edit' : 'display';
             setMode(newMode); 
           }} />
-          <MdOutlineDeleteOutline color="red" size="2rem" onClick={deleteBowl}/>
+          <MdOutlineDeleteOutline color="var(--ion-color-danger)" size="2rem" onClick={deleteBowl}/>
         </div>
     </div>
   )

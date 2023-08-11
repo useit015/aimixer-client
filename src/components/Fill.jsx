@@ -1,4 +1,4 @@
-import { IonButton, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonButton, IonItem, IonSelect, IonSelectOption, IonTextarea } from '@ionic/react';
 import './Fill.scss'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +11,7 @@ import File from '../inputs/File';
 import Link from '../inputs/Link';
 import AIMixerAsset from '../inputs/AIMixerAsset';
 import Text from '../inputs/Text';
+import { bowlsSetCustomInstructions } from '../store/sliceBowls';
 
 function Fill() {
 
@@ -40,8 +41,13 @@ function Fill() {
           })}
     
         </IonSelect>
+        
       </IonItem>
-      <IonItem>
+      {curBowl.output === 'custom' && <IonItem>
+          <IonTextarea rows={4} label="Custom" placeholder="AI instructions" value={curBowl.customInstructions} onIonChange={(e) => dispatch(bowlsSetCustomInstructions({bowlId: curBowl.id, customInstructions: e.target.value}))}></IonTextarea>
+       </IonItem>
+      }
+      {curBowl.output !== 'custom' &&  <IonItem>
         <IonSelect label="Length" placeholder={curLength.name} value={curLength.id} onIonChange={(e) => {
           console.log(e.detail.value);
           socketService.emit('changeBowlLength', {id: curBowl.id, length: e.detail.value, token: login.token})
@@ -51,7 +57,8 @@ function Fill() {
           })}
     
         </IonSelect>
-      </IonItem>
+       </IonItem>
+      }
       <IonItem>
         <IonSelect label="Source" placeholder={curSource.name} value={curSource.id} onIonChange={(e) => {
           console.log(e.detail.value);
@@ -73,7 +80,7 @@ function Fill() {
         
       </div>
       {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}>{curBowl.contents.length}</div> }
-      {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> }
+      {/* {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> } */}
     </div>
   )
 }

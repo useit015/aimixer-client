@@ -4,7 +4,9 @@
     border-radius: 4px;
     margin-bottom: .5rem;
     padding: .5rem 1rem;
-
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: var(--ion-card-background-color);
+    
     &__Num-Words {
         margin: 0 auto;
         display: block;

@@ -55,7 +55,7 @@ function ContentsCard({content}) {
             
        
             
-            <MdOutlineDeleteOutline color="red" size="2rem" onClick={() => {}}/>
+            <MdOutlineDeleteOutline color="var(--ion-color-danger)" size="2rem" onClick={() => {}}/>
         </div>
         {showPicker && <IonDatetime className='ContentsCard__Date-Picker' value={content.date} presentation='date' onIonChange={handleDateChange}></IonDatetime>}
     </div>

@@ -6,7 +6,8 @@
     border-radius: 4px;
     margin-bottom: 1rem;
     display: flex;
-    
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: var(--ion-card-background-color);
     overflow: hidden;
 
     &__Title {

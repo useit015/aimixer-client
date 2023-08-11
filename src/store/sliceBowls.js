@@ -89,10 +89,18 @@ const bowlsSlice = createSlice({
                 bowl.creations.push(creation);
                 return state;
             }
+        },
+        bowlsSetCustomInstructions: (state, action) => {
+            const { bowlId, customInstructions } = action.payload;
+            const bowl = state.find(s => s.id === bowlId);
+            if (bowl) {
+                bowl.customInstructions = customInstructions;
+                return state;
+            }
         }
     }
 });
 
-export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl, bowlsChangeContentDate, bowlsSetInfo  } = bowlsSlice.actions;
+export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl, bowlsChangeContentDate, bowlsSetInfo, bowlsSetCustomInstructions  } = bowlsSlice.actions;
 
 export default bowlsSlice.reducer;

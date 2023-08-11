@@ -7,7 +7,7 @@ import { toastSetIsOpen, toastSetMessage } from './store/sliceToast';
 import Logo from './assets/images/logo/svg/logo-no-background.svg';
 import Bowls from './components/Bowls';
 import Fill from './components/Fill';
-import ScaleLoader from 'react-spinners/ScaleLoader';
+import GridLoader from 'react-spinners/GridLoader';
 import Mix from './components/Mix';
 import BasicTextEditor from './components/BasicTextEditor';
 import Jodit from './components/Jodit';
@@ -45,7 +45,7 @@ const DesktopApp = () => {
         </IonContent>
       </IonPage>
       {spinner.status && <div style={{height: '100vh', width: '100vw', position: 'fixed', top: '0', left: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 100}}>
-          <ScaleLoader color='var(--ion-color-primary)' height='3rem' />
+          <GridLoader color='var(--ion-color-primary)' height='3rem' />
       </div> }
     </IonApp>
   )

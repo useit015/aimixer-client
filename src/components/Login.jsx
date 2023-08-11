@@ -124,7 +124,7 @@ const Login = () => {
             dispatch(loginSetIsCorporateAccount(e.target.checked))
             }}><b>Company Account:</b> Allow all {domain}</IonCheckbox>}
           
-          <IonButton className='Login__Submit-Button' onClick={handleSubmit}>Submit</IonButton>
+          <IonButton color="primary" className='Login__Submit-Button' onClick={handleSubmit}>Submit</IonButton>
           
           {login.mode === 'login' && <IonButton className='Login__Submit-Button' fill='outline'
           onClick={() => dispatch(loginSetMode('register'))}
