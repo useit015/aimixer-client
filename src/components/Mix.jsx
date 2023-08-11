@@ -8,6 +8,7 @@ import ContentsCard from './ContentsCard';
 import { spinnerSetStatus } from '../store/sliceSpinner';
 import axios from 'axios'
 import { bowlsSetInfo } from '../store/sliceBowls';
+import * as socketService from '../socketService';
 
 function Mix() {
 
@@ -22,10 +23,6 @@ function Mix() {
     const curOutput = fill.outputs.find(o => o.id === curBowl.output);
     const curLength = fill.lengths.find(o => o.id === curBowl.length);
     const curSource = fill.sources.find(o => o.id === curBowl.source);
-
-    const handleMix = () => {
-
-    }
 
     const handleApply = () => {
 
@@ -74,7 +71,7 @@ function Mix() {
 
   return (
     <div className='Mix'>
-        <IonButton className='Mix__Button-Mix' color={'primary'} onClick={handleMix}>Mix</IonButton>
+        <IonButton className='Mix__Button-Mix' color={'primary'} onClick={() => socketService.emit('mix', {login, bowls, mix, bowlId: curBowl.id})}>Mix</IonButton>
         <h1 className="Mix__Title">{curBowl.name}</h1>
         <h2 className="Mix__Length">{mixLength} Words</h2>
         <IonItem>
