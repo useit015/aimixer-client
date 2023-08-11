@@ -10,6 +10,7 @@ import Fill from './components/Fill';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import Mix from './components/Mix';
 import BasicTextEditor from './components/BasicTextEditor';
+import Jodit from './components/Jodit';
 
 const DesktopApp = () => {
 
@@ -32,6 +33,7 @@ const DesktopApp = () => {
           {login.mode === 'fill' && <Fill />}
           {login.mode === 'mix' && <Mix />}
           {login.mode === 'basicEditor' && <BasicTextEditor />}
+          {login.mode === 'jodit' && <Jodit />}
           <IonToast
               isOpen={toast.isOpen}
               message={toast.message}

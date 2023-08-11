@@ -73,6 +73,7 @@ function Fill() {
         
       </div>
       {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}>{curBowl.contents.length}</div> }
+      {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> }
     </div>
   )
 }

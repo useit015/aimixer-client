@@ -1,0 +1,22 @@
+.Jodit {
+    max-width: 900px;
+    display: block;
+    margin: 1.5rem auto 0 auto;
+    position: relative;
+
+    &__Title {
+        color: var(--ion-color-primary);
+        text-align: center;
+        margin-bottom: 0;
+    }
+    &__Button-Back {
+        display: block;
+        margin: auto;
+        width: 9rem;
+    }
+
+}
+
+.jodit-react-container {
+    margin-top: 1rem;
+}

@@ -87,6 +87,7 @@ function Mix() {
 
 
         <div className='Mix__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}>{curBowl.contents.length}</div>
+        {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> }
     </div>
   )
 }
