@@ -81,6 +81,14 @@ const bowlsSlice = createSlice({
                 }
                 return state;
             }
+        },
+        bowlsAddCreation: (state, action) => {
+            const { bowlId, creation } = action.payload;
+            const bowl = state.find(s => s.id === bowlId);
+            if (bowl) {
+                bowl.creations.push(creation);
+                return state;
+            }
         }
     }
 });

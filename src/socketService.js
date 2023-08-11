@@ -109,6 +109,15 @@ export const setupTheSocket = (socketio, url, store) => {
         })
     });
 
+    socket.on('addCreation', ({bowlId, creation}) => {
+        store.dispatch({
+            type: 'bowls/bowlsAddCreation',
+            payload: {
+                bowlId, creation
+            }
+        })
+    });
+
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);

@@ -7,7 +7,9 @@ const outputs = [
     {id: 'landingPage', name: 'Landing Page'},
     {id: 'salesEmail', name: 'Sales Email'},
     {id: 'productDescription', name: 'Product Description'},
-    {id: 'custom', name: 'Custom'}
+    {id: 'code', name: 'Programming Code'},
+    {id: 'list', name: 'List'},
+    {id: 'custom', name: 'Custom'},
 ]
 
 const lengths = [
@@ -22,7 +24,6 @@ const sources = [
     {id: 'link', name: 'Link'},
     {id: 'file', name: 'File'},
     {id: 'text', name: 'Text'},
-    {id: 'csv', name: 'Chart / Spreadsheet'},
     {id: 'aiMixerAsset', name: 'AI Mixer Asset'},
     
 ]
