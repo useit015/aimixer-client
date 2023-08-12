@@ -31,8 +31,8 @@ function Fill() {
     console.log('FillPage', fill, curBowl);
   return (
     <div className='Fill'>
-      <IonButton className='Fill__Button-Change-Bowl' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Blender</IonButton>
-      <h1 className="Fill__Title">{curBowl.name}</h1>
+      <IonButton className={curBowl.contents.length > 0 ? 'Fill__Button-Change-Bowl' : 'Fill__Button-Change-Bowl--hidden'} color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Blender</IonButton>
+      <h1 className="Fill__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
       <IonItem>
         <IonSelect label="Create" placeholder={curOutput.name} value={curOutput.id} onIonChange={(e) => {
           console.log(e.detail.value);

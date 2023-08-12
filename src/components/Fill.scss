@@ -7,11 +7,18 @@
     &__Title {
         color: var(--ion-color-primary);
         text-align: center;
+        
+        cursor: pointer;
+        
     }
     &__Button-Change-Bowl {
         display: block;
         margin: auto;
         width: 9rem;
+        opacity: 1;
+        &--hidden {
+            opacity: 0;
+        }
     }
     &__Input {
         margin-top: 1rem;
