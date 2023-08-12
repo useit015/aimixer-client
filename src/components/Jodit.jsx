@@ -1,11 +1,19 @@
+/*
+ * Jodit Examples: https://codesandbox.io/examples/package/jodit-react
+ */
+
 import './Jodit.scss'
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginSetMode } from '../store/sliceLogin';
 import { IonButton } from '@ionic/react';
 import axios from 'axios';
+import { FiEdit } from 'react-icons/fi';
 
 import JoditEditor from 'jodit-react';
+import { TbBowl } from 'react-icons/tb';
+import { RiBlenderLine } from 'react-icons/ri';
+
 
 function Jodit() {
   const editor = useRef(null);
@@ -83,7 +91,26 @@ function Jodit() {
         'copyformat', '|',
         'symbol',
         'print',
-        'about'
+        'about',
+        {
+          name: "copyContent",
+          tooltip: "Copy HTML to Clipboard",
+          iconURL: "../assets/images/delete.svg",
+          // exec: function(editor) {
+          //   let html = editor.value;
+          //   html = html.replaceAll('Bankman', 'Bankwoman');
+          //   setContent(html);
+          //   console.log(html);
+          // }
+          popup: (editor, current, self, close) => {
+            console.log(editor);
+            const selection = editor.selection.current();
+            console.log(selection)
+            let divElement = editor.create.div("merge-field-popup");
+            divElement.innerText = "Hello There"
+            return divElement;
+          }
+        }
     ],
     // buttonsXS: [
     //     'bold',
@@ -105,6 +132,9 @@ function Jodit() {
   const dispatch = useDispatch();
 
   const curBowl = bowls.find(b => b.id == fill.currentBowl);
+
+  console.log('Jodit curBowl', curBowl)
+
 
   const setTheContent = (data) => {
     const paragraphs = data.split("\n");
@@ -128,21 +158,30 @@ function Jodit() {
     }
   }
 
+  const config3 = useMemo(
+    () => (config2),
+    []
+);
+
   useEffect(() => {
     if (!content) fetchContent();
+    
   })
 
   return (
     <div className='Jodit'>
-        <IonButton className='Jodit__Button-Back' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Back</IonButton>
+        <IonButton className='Jodit__Button-Back' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Upload</IonButton>
+        <div className='Jodit__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
+        {curBowl.contents.length > 0 && <div className='Jodit__Num-Creations' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
         <JoditEditor
           
           ref={editor}
           value={content}
-          config={config2}
+          config={config3}
           tabIndex={1} // tabIndex of textarea
           onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-          onChange={newContent => {}}
+          onChange={newContent => {console.log('hello')}}
+          
         />
       
     </div>

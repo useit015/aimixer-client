@@ -12,6 +12,8 @@ import Link from '../inputs/Link';
 import AIMixerAsset from '../inputs/AIMixerAsset';
 import Text from '../inputs/Text';
 import { bowlsSetCustomInstructions } from '../store/sliceBowls';
+import { RiBlenderLine } from 'react-icons/ri';
+import { PiArticle } from 'react-icons/pi';
 
 function Fill() {
 
@@ -29,7 +31,7 @@ function Fill() {
     console.log('FillPage', fill, curBowl);
   return (
     <div className='Fill'>
-      <IonButton className='Fill__Button-Change-Bowl' color={'primary'} onClick={() => dispatch(loginSetMode('bowls'))}>Change Bowl</IonButton>
+      <IonButton className='Fill__Button-Change-Bowl' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Blender</IonButton>
       <h1 className="Fill__Title">{curBowl.name}</h1>
       <IonItem>
         <IonSelect label="Create" placeholder={curOutput.name} value={curOutput.id} onIonChange={(e) => {
@@ -79,8 +81,8 @@ function Fill() {
         {curBowl.source === 'file' && <File />}
         
       </div>
-      {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}>{curBowl.contents.length}</div> }
-      {/* {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> } */}
+      {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+      {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }
     </div>
   )
 }

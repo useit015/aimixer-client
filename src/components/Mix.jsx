@@ -9,6 +9,8 @@ import { spinnerSetStatus } from '../store/sliceSpinner';
 import axios from 'axios'
 import { bowlsSetInfo } from '../store/sliceBowls';
 import * as socketService from '../socketService';
+import { TbBowl } from 'react-icons/tb';
+import { PiArticle } from 'react-icons/pi';
 
 function Mix() {
     const login = useSelector(state => state.login);
@@ -84,8 +86,8 @@ function Mix() {
             })}
         </div>
 
-        <div className='Mix__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}>{curBowl.contents.length}</div>
-        {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}>{curBowl.creations.length}</div> }
+        <div className='Mix__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
+        {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }
     </div>
   )
 }

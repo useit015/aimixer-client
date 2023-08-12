@@ -14,6 +14,35 @@
         margin: auto;
         width: 9rem;
     }
+    &__Num-Contents {
+        position: fixed;
+        top: 1rem;
+        right: 1.5rem;
+        background-color: var(--ion-color-primary);
+        color: var(--ion-color-primary-contrast);
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__Num-Creations {
+        position: fixed;
+        top: 4.5rem;
+        right: 1.5rem;
+        background-color: var(--ion-color-primary);
+        color: var(--ion-color-primary-contrast);
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
 
 }
 

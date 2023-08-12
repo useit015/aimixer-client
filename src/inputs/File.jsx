@@ -6,14 +6,20 @@ import {v4 as uuidv4} from 'uuid';
 import { useDispatch } from 'react-redux';
 import { spinnerSetStatus } from '../store/sliceSpinner';
 import { IonProgressBar } from '@ionic/react';
+import FileCard from '../components/FileCard';
 
 const File = () => {
 
-  const [fileName, setFileName] = useState('');
-  const [fileSize, setFileSize] = useState(0);
+  const [files, setFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const dispatch = useDispatch();
+
+  const deleteFile = id => {
+    const curFiles = [...files];
+    const remainingFiles = curFiles.filter(file => file.id !== id);
+    setFiles(remainingFiles);
+  }
 
   const uploadToS3 = async (
     uploadUrl,
@@ -62,13 +68,12 @@ const File = () => {
 
     const onDrop = useCallback( async acceptedFiles => {
         dispatch(spinnerSetStatus(true))
-        const date = new Date();
-        let folder = date.toISOString();
-        folder = folder.substring(0, folder.indexOf('T'));
-
+        
         for (let i = 0; i < acceptedFiles.length; ++i) {
           let file = acceptedFiles[i];
-          console.log('accepted files', folder, acceptedFiles);
+          file.id = uuidv4();
+          console.log('accepted files', acceptedFiles);
+          continue;
           let request = {
             url: `https://query.pymnts.com:6255/presignedUrl`,
             method: 'post',
@@ -109,7 +114,8 @@ const File = () => {
           }
         };
 
-        setFileName('');
+        setFiles(acceptedFiles);
+
         dispatch(spinnerSetStatus(false))
     })
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -124,12 +130,12 @@ const File = () => {
                   <p style={{height:'6rem', width:'100%'}}>&nbsp;Drag 'n' drop some files here, or click to select files</p>
               }
           </div>
-          { fileName && <div>
-            <p>{fileName} ({fileSize.toLocaleString()} bytes)</p>
-            <IonProgressBar value={uploadProgress} max={100}  />
-          </div>
-
+          {files.length > 0 && <div className='File__Cards'>
+            {files.map(file => <FileCard key={file.id} file={file} deleteFile={deleteFile}/>)}
+            </div>
           }
+
+          
         </div>
     </div>
   )

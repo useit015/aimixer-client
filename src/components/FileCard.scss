@@ -1,0 +1,41 @@
+.FileCard {
+
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 4px;
+    margin: 1rem 0;
+    min-width: 250px;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: var(--ion-card-background-color);
+    padding: .5rem 1rem;
+
+    @media  screen and (min-width: 768px) {
+        width: 49%;
+    }
+
+    &__Name {
+        text-align: center;
+        margin: 0 0 .5rem 0;
+        font-size: 1.25rem;
+    }
+    &__Input-Name {
+        font-size: 1rem;
+        font-weight: 400;
+        width: 90%;
+        display: block;
+        margin: 0 auto .5rem auto;
+        text-align: center;
+    }
+    &__Button-Date {
+        display: block;
+        margin: auto;
+        width: fit-content;
+    }
+    &__Action-Container {
+        display: flex;
+        justify-content: space-between;
+        padding: .25rem;
+    }
+
+}
