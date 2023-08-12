@@ -1,4 +1,4 @@
-import { IonButton, IonDatetime, IonProgressBar } from "@ionic/react";
+import { IonButton, IonCheckbox, IonDatetime, IonProgressBar } from "@ionic/react";
 import "./FileCard.scss";
 import React, { useState } from 'react';
 import { DateTime } from "luxon";
@@ -14,8 +14,11 @@ function FileCard({file, deleteFile}) {
     const [showPicker, setShowPicker] = useState(false);
     const [ISODate, setISODate] = useState(DateTime.fromMillis(file.lastModified).toISODate());
     const [mode, setMode] = useState('display');
+    const [speakerTranscript, setSpeakerTranscript] = useState(true);
+
     let loc = file.name.lastIndexOf('.');
-    let initName = file.name.substr(0, loc).replaceAll(/[-\_]/g, ' ');
+    const extension = loc !== -1 ? file.name.substring(loc) : '.bin';
+    let initName = loc !== -1 ? file.name.substr(0, loc).replaceAll(/[-\_]/g, ' ') : file.name.replaceAll(/[-\_]/g, ' ');
     const [name, setName] = useState(initName);
     const [progress, setProgress] = useState(0);
 
@@ -26,6 +29,24 @@ function FileCard({file, deleteFile}) {
     const bowls = useSelector(state => state.bowls);
     
     const curBowl = bowls.find(b => b.id == fill.currentBowl);
+
+    const videoTypes = [
+      '.mp4',
+      '.mkv',
+      '.mov',
+      '.wmv',
+      '.avi',
+    ]
+
+    const audioTypes = [
+      '.mp3',
+      '.m4a',
+      '.flac',
+      '.wav'
+    ]
+
+    let isVideo = videoTypes.find(v => v === extension) ? true : false;
+    let isAudio = audioTypes.find(a => a === extension) ? true : false;
 
     console.log('lastModified', file.lastModified);
 
@@ -117,6 +138,9 @@ function FileCard({file, deleteFile}) {
               url,
               token: login.token,
               bowlId: curBowl.id,
+              options: {
+                speakerTranscript
+              }
             }
         }
 
@@ -149,7 +173,11 @@ function FileCard({file, deleteFile}) {
           <IonButton className='BowlCard__FillButton' onClick={handleAddFile}>
               {'Add'}
           </IonButton>
-          <IonProgressBar className='FileCard__Progress' value={progress}/>
+          {(isVideo || isAudio) && <IonCheckbox className='FileCard__Speaker-Checkbox' labelPlacement="end" checked={speakerTranscript} onIonChange={(e) => {
+            let curVal = speakerTranscript;
+            setSpeakerTranscript(!curVal);
+          }}>Create Speaker Transcript</IonCheckbox>
+          }
           <div className="FileCard__Action-Container">
             <FiEdit color='var(--ion-color-primary)' size="1.85rem" 
             onClick={() => {
