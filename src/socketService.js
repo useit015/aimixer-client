@@ -127,6 +127,13 @@ export const setupTheSocket = (socketio, url, store) => {
         })
     });
 
+    socket.on('spinnerStatus', (status) => {
+        store.dispatch({
+            type: 'spinner/spinnerSetStatus',
+            payload: status
+        })
+    });
+
 
 }
 

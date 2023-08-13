@@ -13,6 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 import JoditEditor from 'jodit-react';
 import { TbBowl } from 'react-icons/tb';
 import { RiBlenderLine } from 'react-icons/ri';
+import * as socketService from '../socketService';
+import { toastSet } from '../store/sliceToast';
+import { spinnerSetStatus } from '../store/sliceSpinner';
 
 function Jodit() {
   const login = useSelector(state => state.login);
@@ -198,6 +201,18 @@ const fetchOutputs = async () => {
   }
 }
 
+  const handleUpload = () => {
+    socketService.emit('wordpressUpload', {
+      username: login.username,
+      password: login.password,
+      token: login.token,
+      title,
+      postType: output,
+      content
+    })
+    dispatch(spinnerSetStatus(true))
+  }
+
   useEffect(() => {
     if (!content) fetchContent(0);
     if (login.domain === '@pymnts.com') fetchOutputs();
@@ -206,7 +221,7 @@ const fetchOutputs = async () => {
 
   return (
     <div className='Jodit'>
-        <IonButton className='Jodit__Button-Back' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Upload</IonButton>
+        <IonButton className='Jodit__Button-Back' color={'primary'} onClick={handleUpload}>Upload</IonButton>
         <h1 className="Jodit__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
         <h3 className='Jodit__Version'
           onClick={() => {
