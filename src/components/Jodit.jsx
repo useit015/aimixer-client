@@ -6,20 +6,31 @@ import './Jodit.scss'
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginSetMode } from '../store/sliceLogin';
-import { IonButton, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonButton, IonInput, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import axios from 'axios';
 import { FiEdit } from 'react-icons/fi';
-
+import { v4 as uuidv4 } from 'uuid';
 import JoditEditor from 'jodit-react';
 import { TbBowl } from 'react-icons/tb';
 import { RiBlenderLine } from 'react-icons/ri';
 
 function Jodit() {
+  const login = useSelector(state => state.login);
+  const fill = useSelector(state => state.fill);
+  const bowls = useSelector(state => state.bowls);
+  const mix = useSelector(state => state.mix);
+  
+  const dispatch = useDispatch();
+
+  const curBowl = bowls.find(b => b.id == fill.currentBowl);
+
   const editor = useRef(null);
 	const [content, setContent] = useState('');
   const [output, setOutput] = useState('post');
   const [outputs, setOutputs] = useState([]);
-  const [creation, setCreation] = useState('creation-0')
+  const [creation, setCreation] = useState('creation-0');
+  const [title, setTitle] = useState(`${curBowl.name}--${uuidv4()}`);
+  const [selectVersion, setSelectVersion] = useState(false);
 
   const excludedOutputs = [
     'attachment',
@@ -135,14 +146,7 @@ function Jodit() {
     // ]
 }
 
-  const login = useSelector(state => state.login);
-  const fill = useSelector(state => state.fill);
-  const bowls = useSelector(state => state.bowls);
-  const mix = useSelector(state => state.mix);
-  
-  const dispatch = useDispatch();
 
-  const curBowl = bowls.find(b => b.id == fill.currentBowl);
 
   console.log('Jodit curBowl', curBowl)
 
@@ -203,8 +207,38 @@ const fetchOutputs = async () => {
   return (
     <div className='Jodit'>
         <IonButton className='Jodit__Button-Back' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Upload</IonButton>
+        <h1 className="Jodit__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
+        <h3 className='Jodit__Version'
+          onClick={() => {
+            const curSetting = selectVersion;
+            setSelectVersion(!curSetting);
+          }}
+        >
+          {`Version ${Number(creation.split('-')[1])+1}`}
+        </h3>
+        {selectVersion &&  <IonItem>
+            <IonSelect label="Version" placeholder={'post'} value={creation} onIonChange={(e) => {
+              const choice = e.target.value;
+              const parts = choice.split('-');
+              const indexStr = parts[1];
+              const index = Number(indexStr)
+              fetchContent(index);
+              setSelectVersion(false);
+            }}>
+              {curBowl.creations.map((o, i) => {
+                return <IonSelectOption key={`creation-${i}`} value={`creation-${i}`}>{`${i+1}`}</IonSelectOption>
+              })}
+        
+            </IonSelect>
+         </IonItem>
+        }
+        <IonItem className='Jodit__Creation-Name'>
+              <IonInput label="Title" labelPlacement="floating" placeholder="Enter name" value={title} onInput={(e) => {
+                setTitle(e.target.value)
+                }}/>
+        </IonItem>
         {login.domain === '@pymnts.com' && <IonItem>
-            <IonSelect label="Publish" placeholder={'post'} value={output} onIonChange={(e) => {
+            <IonSelect label="Type" placeholder={'post'} value={output} onIonChange={(e) => {
               setOutput(e.target.value)
             }}>
               {outputs.map(o => {
@@ -214,23 +248,7 @@ const fetchOutputs = async () => {
             </IonSelect>
          </IonItem>
         }
-        <IonItem>
-            <IonSelect label="Creation" placeholder={'post'} value={creation} onIonChange={(e) => {
-              const choice = e.target.value;
-              console.log('choice');
-              const parts = choice.split('-');
-              console.log(parts);
-              const indexStr = parts[1];
-              console.log('indexStr');
-              const index = Number(indexStr)
-              fetchContent(index);
-            }}>
-              {curBowl.creations.map((o, i) => {
-                return <IonSelectOption key={`creation-${i}`} value={`creation-${i}`}>{`${i+1}`}</IonSelectOption>
-              })}
-        
-            </IonSelect>
-         </IonItem>
+       
         <JoditEditor
           
           ref={editor}
