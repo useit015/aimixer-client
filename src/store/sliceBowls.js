@@ -97,6 +97,14 @@ const bowlsSlice = createSlice({
                 bowl.customInstructions = customInstructions;
                 return state;
             }
+        },
+        bowlsDeleteContent: (state, action) => {
+            const { bowlId, contentId } = action.payload;
+            const bowl = state.find(s => s.id === bowlId);
+            if (bowl) {
+                bowl.contents = bowl.contents.filter(c => c.id !== contentId);
+                return state;
+            }
         }
     }
 });

@@ -21,6 +21,9 @@
         display: flex;
         justify-content: space-between;
     }
+    &__Delete-Button, &__Edit-Button {
+        cursor: pointer;
+    }
     &__Date-Picker {
         display: block;
         margin: auto;

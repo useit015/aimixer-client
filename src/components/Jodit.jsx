@@ -6,7 +6,7 @@ import './Jodit.scss'
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginSetMode } from '../store/sliceLogin';
-import { IonButton } from '@ionic/react';
+import { IonButton, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import axios from 'axios';
 import { FiEdit } from 'react-icons/fi';
 
@@ -14,10 +14,20 @@ import JoditEditor from 'jodit-react';
 import { TbBowl } from 'react-icons/tb';
 import { RiBlenderLine } from 'react-icons/ri';
 
-
 function Jodit() {
   const editor = useRef(null);
 	const [content, setContent] = useState('');
+  const [output, setOutput] = useState('post');
+  const [outputs, setOutputs] = useState([]);
+
+  const excludedOutputs = [
+    'attachment',
+    'nav_menu_item',
+    'wp_block',
+    'wp_template',
+    'wp_template_part',
+    'wp_navigation'
+  ]
 
   const config = 
 		{
@@ -135,7 +145,6 @@ function Jodit() {
 
   console.log('Jodit curBowl', curBowl)
 
-
   const setTheContent = (data) => {
     const paragraphs = data.split("\n");
     for (let i = 0; i < paragraphs.length; ++i) {
@@ -163,16 +172,48 @@ function Jodit() {
     []
 );
 
+const fetchOutputs = async () => {
+  if (outputs.length > 1) return;
+
+  const request = {
+    url: `https://delta.pymnts.com/wp-json/wp/v2/types`,
+    method: 'get'
+  }
+
+  try {
+    const response = await axios(request);
+    const postTypes = Object.keys(response.data);
+    console.log('postTypes', postTypes);
+    const selections = postTypes.filter(t => !excludedOutputs.find(eo => eo === t));
+    setOutputs(selections);
+
+  } catch (err) {
+    console.error(err);
+    setOutputs(['post'])
+  }
+}
+
   useEffect(() => {
     if (!content) fetchContent();
+    if (login.domain === '@pymnts.com') fetchOutputs();
     
   })
 
   return (
     <div className='Jodit'>
         <IonButton className='Jodit__Button-Back' color={'primary'} onClick={() => dispatch(loginSetMode('mix'))}>Upload</IonButton>
-        <div className='Jodit__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
-        {curBowl.contents.length > 0 && <div className='Jodit__Num-Creations' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+        {login.domain === '@pymnts.com' && <IonItem>
+            <IonSelect label="Create" placeholder={'post'} value={output} onIonChange={(e) => {
+              setOutput(e.target.value)
+            }}>
+              {outputs.map(o => {
+                return <IonSelectOption key={o} value={o}>{o}</IonSelectOption>
+              })}
+        
+            </IonSelect>
+         </IonItem>
+        }
+        
         <JoditEditor
           
           ref={editor}
@@ -183,7 +224,9 @@ function Jodit() {
           onChange={newContent => {console.log('hello')}}
           
         />
-      
+        <div className='Jodit__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
+        {curBowl.contents.length > 0 && <div className='Jodit__Num-Creations' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+        
     </div>
   )
 }

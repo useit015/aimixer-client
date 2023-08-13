@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Mix.scss';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { loginSetMode } from '../store/sliceLogin';
 import { IonButton, IonItem, IonTextarea } from '@ionic/react';
 import { mixSetTopics } from '../store/sliceMix';
@@ -70,6 +70,9 @@ function Mix() {
     let mixLength = 0;
     for (let i = 0; i < curBowl.contents.length; ++i) mixLength += typeof curBowl.contents[i].infoLength !== 'undefined' ? curBowl.contents[i].infoLength : curBowl.contents[i].length;
 
+    useEffect(() => {
+        if (!curBowl.contents.length) dispatch(loginSetMode('fill'));
+    })
   return (
     <div className='Mix'>
         <IonButton className='Mix__Button-Mix' color={'primary'} onClick={() => socketService.emit('mix', {login, bowls, mix, bowlId: curBowl.id})}>Mix</IonButton>
@@ -79,7 +82,7 @@ function Mix() {
             <IonTextarea rows={4} label="Topics" placeholder="All" value={mix.topics} onIonChange={handleSetTopics}></IonTextarea>
         </IonItem>
         <IonButton className='Mix__Button-Apply' color={'primary'} onClick={handleApply}>Set Topics</IonButton>
-        <h2 className="Mix__Subtitle">Bowl Contents</h2>
+        <h2 className="Mix__Subtitle">Contents</h2>
         <div className="Mix__Contents-Container">
             {curBowl.contents.map(c => {
                 return <ContentsCard key={c.id} content={c}/>

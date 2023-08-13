@@ -32,6 +32,10 @@ function ContentsCard({content}) {
         socketService.emit('changeContentDate', {token: login.token, contentId: content.id, bowlId: curBowl.id, date: e.target.value});
     }
 
+    const handleDelete = e => {
+        socketService.emit('deleteContent', {token: login.token, contentId: content.id, bowlId: curBowl.id});
+    }
+
     const handleEdit = () => {
       dispatch(basicEditorSet({bowlId: curBowl.id, contentId: content.id, contentLink: content.link}));
       dispatch(loginSetMode('basicEditor'));
@@ -43,7 +47,7 @@ function ContentsCard({content}) {
         <div className="ContentsCard__Num-Words">{typeof content.infoLength !== 'undefined' ? content.infoLength : content.length} Words</div>
         <h2 className="ContentsCard__Title">{content.title}</h2>
         <div className='ContentsCard__Action-Container'>
-          <FiEdit color='var(--ion-color-primary)' size="1.85rem" 
+          <FiEdit className='ContentsCard__Edit-Button' color='var(--ion-color-primary)' size="1.85rem" 
             onClick={() => {
               handleEdit();
             }} />
@@ -55,7 +59,7 @@ function ContentsCard({content}) {
             
        
             
-            <MdOutlineDeleteOutline color="var(--ion-color-danger)" size="2rem" onClick={() => {}}/>
+            <MdOutlineDeleteOutline className='ContentsCard__Delete-Button' color="var(--ion-color-danger)" size="2rem" onClick={handleDelete}/>
         </div>
         {showPicker && <IonDatetime className='ContentsCard__Date-Picker' value={content.date} presentation='date' onIonChange={handleDateChange}></IonDatetime>}
     </div>

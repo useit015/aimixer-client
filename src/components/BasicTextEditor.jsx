@@ -1,14 +1,15 @@
 import './BasicTextEditor.scss';
 import { IonButton, IonInput, IonItem, IonTextarea } from '@ionic/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { basicEditorSetContent } from '../store/sliceBasicEditor';
+import { basicEditorSetContent, basicEditorSetReplaceTerm, basicEditorSetSearchTerm } from '../store/sliceBasicEditor';
 import axios from 'axios';
 import { toastSet } from '../store/sliceToast';
 import { loginSetMode } from '../store/sliceLogin';
 
 function BasicTextEditor() {
   const [count, setCount] = useState();
+  const textAreaElement = useRef();
 
   const basicEditor = useSelector(state => state.basicEditor);
   const dispatch = useDispatch();
@@ -43,6 +44,23 @@ function BasicTextEditor() {
 
     return setCount(count);
   }
+
+  const handleSelection = e => {
+    const element = textAreaElement.current;
+    console.log('element', element)
+    let startPos = element.selectionStart;
+    let endPos = element.selectionEnd;
+    let selectedText = element.value.substring(startPos, endPos);
+
+    if(selectedText.length <= 0) {
+      return; // stop here if selection length is <= 0
+    }
+    
+    // log the selection
+    console.log("startPos: " + startPos, " | endPos: " + endPos );
+    console.log("selectedText: " +  selectedText);
+    dispatch(basicEditorSetSearchTerm(selectedText));
+  }
   
   useEffect(() => {
     if (basicEditor.status) loadContent()
@@ -54,10 +72,28 @@ function BasicTextEditor() {
       <IonButton className='BasicTextEditor__Button-Done' color={'primary'} onClick={() => {dispatch(loginSetMode('mix'))}}>Save</IonButton>
       <h1 className="BasicTextEditor__Title">Edit</h1>
       <IonItem>
-          <IonInput className='BasicEditor__SeachTerm' placeholder="Search term" value={basicEditor.searchTerm} onIonChange={(e) => dispatch(basicEditorSetSearchTerm(e.target.value))} />
-          <div className='BasicEditor__SearchCount'>{count}</div>
+          <IonInput className='BasicEditor__SeachTerm' placeholder="Search" value={basicEditor.searchTerm} onIonChange={(e) => dispatch(basicEditorSetSearchTerm(e.target.value))} />
+          <div className='BasicTextEditor__SearchCount'>{count}</div>
         </IonItem>
-      <IonTextarea className='BasicTextEditor__Edit' value={basicEditor.content} onIonChange={(e) => dispatch(basicEditorSetContent(e.target.value))}/>
+        <IonItem>
+          <IonInput className='BasicTextEditor__ReplaceTerm' placeholder="Replace" value={basicEditor.replaceTerm} onIonChange={(e) => dispatch(basicEditorSetReplaceTerm(e.target.value))} />
+        </IonItem>
+        <IonButton className='BasicTextEditor__Replace-Button' color={"primary"}
+          onClick={(e) => {
+            const re = new RegExp(basicEditor.searchTerm, "gi");
+            const content = basicEditor.content.replaceAll(re, basicEditor.replaceTerm);
+            dispatch(basicEditorSetContent(content));
+          }}
+        >
+          Replace
+        </IonButton>
+      <textarea className='BasicTextEditor__Edit' value={basicEditor.content} 
+        ref={textAreaElement}
+        onChange={(e) => dispatch(basicEditorSetContent(e.target.value))}
+        onMouseUp={handleSelection}
+        onKeyUp={handleSelection}
+        onTouchEnd={handleSelection}
+        />
     </div>
   )
 }

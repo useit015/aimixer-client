@@ -21,9 +21,13 @@ const sliceBasicEditor = createSlice({
             state.searchTerm = action.payload;
             return state;
         },
+        basicEditorSetReplaceTerm: (state, action) => {
+            state.replaceTerm = action.payload;
+            return state;
+        },
     }
 });
 
-export const { basicEditorSet, basicEditorSetContent, basicEditorSetSearchTerm } = sliceBasicEditor.actions;
+export const { basicEditorSet, basicEditorSetContent, basicEditorSetSearchTerm, basicEditorSetReplaceTerm } = sliceBasicEditor.actions;
 
 export default sliceBasicEditor.reducer;

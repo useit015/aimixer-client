@@ -118,6 +118,16 @@ export const setupTheSocket = (socketio, url, store) => {
         })
     });
 
+    socket.on('deleteContent', ({bowlId, contentId}) => {
+        store.dispatch({
+            type: 'bowls/bowlsDeleteContent',
+            payload: {
+                bowlId, contentId
+            }
+        })
+    });
+
+
 }
 
 export const emit = (event, ...args) => socket.emit(event, ...args);
