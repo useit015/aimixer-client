@@ -34,12 +34,15 @@ function Jodit() {
   const [creation, setCreation] = useState('creation-0');
   const [title, setTitle] = useState(`${curBowl.name}--${uuidv4()}`);
   const [selectVersion, setSelectVersion] = useState(false);
-  const [AITags, setAITags] = useState(false);
+  const [useAITags, setUseAITags] = useState(false);
+  const [AITags, setAITags] = useState([]);
   const [AITitles, setAITitles] = useState([]);
   const [selectedAITitle, setSelectedAITitle] = useState('title--0');
+  const [fetchingTags, setFetchingTags] = useState(false);
 
   console.log('AITags', AITags);
   console.log('AITitles', AITitles);
+  console.log(title);
 
   const excludedOutputs = [
     'attachment',
@@ -159,7 +162,37 @@ function Jodit() {
 
   console.log('Jodit curBowl', curBowl)
 
-  const setTheContent = (data) => {
+  const getAITagsTitles = async () => {
+    if(window.fetchingTags) return;
+    else window.fetchingTags = true;
+    
+    const request = {
+      url: `https://api.aimixer.io:5000/getTagsTitles`,
+      method: 'post',
+      data: {
+        token: login.token,
+        content: window.theContent
+      }
+    }
+  
+    dispatch(spinnerSetStatus(true));
+    dispatch(toastSet({color: 'primary', message: "AI Generating Titles and Tags"}));
+    try {
+      const response = await axios(request);
+      setAITitles(response.data.titles);
+      setAITags(response.data.tags);
+      if (response.data.titles && response.data.titles.length) setTitle(response.data.titles[0]);
+    } catch (err) {
+      console.error(err)
+    }
+  
+    dispatch(spinnerSetStatus(false));
+    delete window.fetchingTags;
+  }
+
+
+  const setTheContent = async (data) => {
+    
     const paragraphs = data.split("\n");
     for (let i = 0; i < paragraphs.length; ++i) {
       if (paragraphs[i].endsWith('>')) continue;
@@ -167,18 +200,24 @@ function Jodit() {
     }
 
     data = paragraphs.join("\n");
-
+    window.theContent = data;
     setContent(data);
+    await getAITagsTitles();
   }
 
+  
   const fetchContent = async (index) => {
+    if(window.fetchingContent) return;
+    else window.fetchingContent = true;
     try {
       const response = await axios.get(curBowl.creations[index]);
       setTheContent(response.data);
       setCreation(`creation-${index}`);
+      if (!window.fetchingTags) getAITagsTitles();
     } catch (err) {
       console.error(err);
     }
+    delete window.fetchContent;
   }
 
   const config3 = useMemo(
@@ -206,30 +245,7 @@ const fetchOutputs = async () => {
     setOutputs(['post'])
   }
 }
-
-const getAITagsTitles = async () => {
-  const request = {
-    url: `https://api.aimixer.io:5000/getTagsTitles`,
-    method: 'post',
-    data: {
-      token: login.token,
-      content
-    }
-  }
-
-  dispatch(spinnerSetStatus(true));
-  try {
-    const response = await axios(request);
-    setAITitles(response.data.titles);
-    setAITags(response.data.tags);
-  } catch (err) {
-    console.error(err)
-  }
-
-  dispatch(spinnerSetStatus(false));
-}
-
-  const handleUpload = () => {
+  const handleUpload = async () => {
     socketService.emit('wordpressUpload', {
       username: login.username,
       password: login.password,
@@ -237,24 +253,28 @@ const getAITagsTitles = async () => {
       title,
       postType: output,
       content,
-      AITags: AITags
+      AITags: AITags,
+      AITitles: AITitles
     })
     dispatch(spinnerSetStatus(true))
   }
 
   useEffect(() => {
-    if (!content) fetchContent(0);
+    if (!content) {
+      fetchContent(0);
+    }
     if (login.domain === '@pymnts.com') fetchOutputs();
-    
   })
+
+
 
   return (
     <div className='Jodit'>
         <IonButton className='Jodit__Button-Back' color={'primary'} onClick={handleUpload}>Upload</IonButton>
-        {login.domain === '@pymnts.com' && <IonCheckbox className='Jodit__AI-Tags' labelPlacement="end" checked={AITags} onIonChange={(e) => setAITags(e.target.checked)}>
+        {/* {login.domain === '@pymnts.com' && <IonCheckbox className='Jodit__AI-Tags' labelPlacement="end" checked={useAITags} onIonChange={(e) => setUseAITags(e.target.checked)}>
             Add Tags
           </IonCheckbox>
-        }
+        } */}
         <h1 className="Jodit__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
         <h3 className='Jodit__Version'
           onClick={() => {
@@ -288,8 +308,10 @@ const getAITagsTitles = async () => {
            </IonItem>
           }
           {AITitles.length > 0 && <IonItem className='Jodit__Creation-Name-Select' >
-            <IonSelect className='Jodit__Creation-Name-Select' label="Title" placeholder={'post'} value={selectedAITitle} onIonChange={(e) => {
+            <IonSelect className='Jodit__Creation-Name-Select' label="Title" justify="space-between" placeholder={'post'} value={selectedAITitle} onIonChange={(e) => {
               setSelectedAITitle(e.target.value)
+              const index = Number(e.target.value.split('--')[1]);
+              setTitle(AITitles[index]);
             }}>
               {AITitles.map((t, i) => {
                 const id = `title--${i}`;
@@ -299,9 +321,9 @@ const getAITagsTitles = async () => {
             </IonSelect>
           </IonItem>
          }
-          <IonButton onClick={getAITagsTitles}>AI Titles</IonButton>
+          <IonButton className='Jodit__AI-Titles-Button' onClick={getAITagsTitles}>AI</IonButton>
         </div>
-        {login.domain === '@pymnts.com' && <IonItem>
+        {login.domain === '@pymnts.com' && <IonItem style={{width: "calc(100% - 3.75rem)"}}>
             <IonSelect label="Type" placeholder={'post'} value={output} onIonChange={(e) => {
               setOutput(e.target.value)
             }}>

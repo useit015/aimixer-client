@@ -63,6 +63,8 @@
     }
     &__Creation-Title-Container {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     &__Creation-Name {
         flex-grow: 1;
@@ -70,14 +72,18 @@
     }
     &__Creation-Name-Select {
         width: calc(100% - 5rem);
+        flex-grow: 1;
         margin-right: .5rem;
+    }
+    &__AI-Titles-Button {
+        height: fit-content;
     }
 
 }
 
 .alert-wrapper {
     width: 80% !important;
-    max-width: 80% !important;
+    max-width: 720px !important;
 }
 
 .jodit-react-container {
