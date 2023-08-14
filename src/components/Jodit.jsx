@@ -6,7 +6,7 @@ import './Jodit.scss'
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { loginSetMode } from '../store/sliceLogin';
-import { IonButton, IonInput, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonButton, IonCheckbox, IonInput, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import axios from 'axios';
 import { FiEdit } from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
@@ -34,6 +34,9 @@ function Jodit() {
   const [creation, setCreation] = useState('creation-0');
   const [title, setTitle] = useState(`${curBowl.name}--${uuidv4()}`);
   const [selectVersion, setSelectVersion] = useState(false);
+  const [AITags, setAITags] = useState(false);
+
+  console.log('AITags', AITags);
 
   const excludedOutputs = [
     'attachment',
@@ -208,7 +211,8 @@ const fetchOutputs = async () => {
       token: login.token,
       title,
       postType: output,
-      content
+      content,
+      AITags: AITags
     })
     dispatch(spinnerSetStatus(true))
   }
@@ -222,6 +226,10 @@ const fetchOutputs = async () => {
   return (
     <div className='Jodit'>
         <IonButton className='Jodit__Button-Back' color={'primary'} onClick={handleUpload}>Upload</IonButton>
+        {login.domain === '@pymnts.com' && <IonCheckbox className='Jodit__AI-Tags' labelPlacement="end" checked={AITags} onIonChange={(e) => setAITags(e.target.checked)}>
+            Add Tags
+          </IonCheckbox>
+        }
         <h1 className="Jodit__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
         <h3 className='Jodit__Version'
           onClick={() => {

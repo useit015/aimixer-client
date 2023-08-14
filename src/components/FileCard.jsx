@@ -71,9 +71,10 @@ function FileCard({file, deleteFile}) {
     
       const parseProgress = (progressEvent) => {
         const progressPercentage =
-          (progressEvent.loaded / progressEvent.total) * 100;
+          Math.ceil((progressEvent.loaded / progressEvent.total) * 100);
+        dispatch(toastSet({color: 'success', message: `Uploading file to AI Mixer Cloud: ${progressPercentage}%`}));
         //console.log('progressPercentage', progressPercentage);
-        setProgress(progressPercentage);
+        //setProgress(progressPercentage);
         //onProgressChange(progressPercentage);
       };
     

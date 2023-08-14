@@ -12,6 +12,7 @@ function BasicTextEditor() {
   const textAreaElement = useRef();
 
   const basicEditor = useSelector(state => state.basicEditor);
+  const login = useSelector(state => state.login)
   const dispatch = useDispatch();
 
   console.log('basicEditor', basicEditor)
@@ -61,6 +62,25 @@ function BasicTextEditor() {
     console.log("selectedText: " +  selectedText);
     dispatch(basicEditorSetSearchTerm(selectedText));
   }
+
+  const handleSave = async () => {
+    let request = {
+      url: `https://assets.aimixer.io:5002/updateLink`,
+      method: 'post',
+      data: {
+        link: basicEditor.contentLink,
+        content: basicEditor.content,
+        token: login.token
+      }
+    }
+
+    try {
+      const response = await axios(request);
+    } catch (err) {
+      console.error(err);
+      dispatch(toastSet({color: 'danger', message: 'Error saving content.'}));
+    }
+  }
   
   useEffect(() => {
     if (basicEditor.status) loadContent()
@@ -69,7 +89,7 @@ function BasicTextEditor() {
 
   return (
     <div className='BasicTextEditor'>
-      <IonButton className='BasicTextEditor__Button-Done' color={'primary'} onClick={() => {dispatch(loginSetMode('mix'))}}>Save</IonButton>
+      <IonButton className='BasicTextEditor__Button-Done' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
       <h1 className="BasicTextEditor__Title">Edit</h1>
       <IonItem>
           <IonInput className='BasicEditor__SeachTerm' placeholder="Search" value={basicEditor.searchTerm} onIonChange={(e) => dispatch(basicEditorSetSearchTerm(e.target.value))} />

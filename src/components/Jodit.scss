@@ -56,6 +56,11 @@
         align-items: center;
         cursor: pointer;
     }
+    &__AI-Tags {
+        display: block;
+        margin: .5rem auto;
+        width: fit-content;
+    }
 
 }
 
