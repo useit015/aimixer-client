@@ -35,8 +35,11 @@ function Jodit() {
   const [title, setTitle] = useState(`${curBowl.name}--${uuidv4()}`);
   const [selectVersion, setSelectVersion] = useState(false);
   const [AITags, setAITags] = useState(false);
+  const [AITitles, setAITitles] = useState([]);
+  const [selectedAITitle, setSelectedAITitle] = useState('title--0');
 
   console.log('AITags', AITags);
+  console.log('AITitles', AITitles);
 
   const excludedOutputs = [
     'attachment',
@@ -204,6 +207,28 @@ const fetchOutputs = async () => {
   }
 }
 
+const getAITagsTitles = async () => {
+  const request = {
+    url: `https://api.aimixer.io:5000/getTagsTitles`,
+    method: 'post',
+    data: {
+      token: login.token,
+      content
+    }
+  }
+
+  dispatch(spinnerSetStatus(true));
+  try {
+    const response = await axios(request);
+    setAITitles(response.data.titles);
+    setAITags(response.data.tags);
+  } catch (err) {
+    console.error(err)
+  }
+
+  dispatch(spinnerSetStatus(false));
+}
+
   const handleUpload = () => {
     socketService.emit('wordpressUpload', {
       username: login.username,
@@ -255,11 +280,27 @@ const fetchOutputs = async () => {
             </IonSelect>
          </IonItem>
         }
-        <IonItem className='Jodit__Creation-Name'>
-              <IonInput label="Title" labelPlacement="floating" placeholder="Enter name" value={title} onInput={(e) => {
-                setTitle(e.target.value)
-                }}/>
-        </IonItem>
+        <div className="Jodit__Creation-Title-Container">
+          {AITitles.length === 0 && <IonItem className='Jodit__Creation-Name'>
+                <IonInput label="Title" labelPlacement="floating" placeholder="Enter name" value={title} onInput={(e) => {
+                  setTitle(e.target.value)
+                  }}/>
+           </IonItem>
+          }
+          {AITitles.length > 0 && <IonItem className='Jodit__Creation-Name-Select' >
+            <IonSelect className='Jodit__Creation-Name-Select' label="Title" placeholder={'post'} value={selectedAITitle} onIonChange={(e) => {
+              setSelectedAITitle(e.target.value)
+            }}>
+              {AITitles.map((t, i) => {
+                const id = `title--${i}`;
+                return <IonSelectOption key={id} value={id}>{t}</IonSelectOption>
+              })}
+        
+            </IonSelect>
+          </IonItem>
+         }
+          <IonButton onClick={getAITagsTitles}>AI Titles</IonButton>
+        </div>
         {login.domain === '@pymnts.com' && <IonItem>
             <IonSelect label="Type" placeholder={'post'} value={output} onIonChange={(e) => {
               setOutput(e.target.value)
@@ -282,8 +323,7 @@ const fetchOutputs = async () => {
           onChange={newContent => {console.log('hello')}}
           
         />
-        <div className='Jodit__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
-        {curBowl.contents.length > 0 && <div className='Jodit__Num-Creations' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+       
         
     </div>
   )

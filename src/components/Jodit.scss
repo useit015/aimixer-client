@@ -61,7 +61,23 @@
         margin: .5rem auto;
         width: fit-content;
     }
+    &__Creation-Title-Container {
+        display: flex;
+    }
+    &__Creation-Name {
+        flex-grow: 1;
+        margin-right: .5rem;
+    }
+    &__Creation-Name-Select {
+        width: calc(100% - 5rem);
+        margin-right: .5rem;
+    }
 
+}
+
+.alert-wrapper {
+    width: 80% !important;
+    max-width: 80% !important;
 }
 
 .jodit-react-container {
