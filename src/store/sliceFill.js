@@ -24,7 +24,8 @@ const sources = [
     {id: 'link', name: 'Link'},
     {id: 'file', name: 'File'},
     {id: 'text', name: 'Text'},
-    {id: 'aiMixerAsset', name: 'AI Mixer Asset'},
+    {id: 'seed', name: 'Seed'},
+    {id: 'asset', name: 'AI Mixer Asset'},
     
 ]
 

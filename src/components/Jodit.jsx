@@ -16,6 +16,7 @@ import { RiBlenderLine } from 'react-icons/ri';
 import * as socketService from '../socketService';
 import { toastSet } from '../store/sliceToast';
 import { spinnerSetStatus } from '../store/sliceSpinner';
+import { DateTime } from 'luxon';
 
 function Jodit() {
   const login = useSelector(state => state.login);
@@ -39,6 +40,7 @@ function Jodit() {
   const [AITitles, setAITitles] = useState([]);
   const [selectedAITitle, setSelectedAITitle] = useState('title--0');
   const [fetchingTags, setFetchingTags] = useState(false);
+  const [creationLink, setCreationLink] = useState('');
 
   console.log('AITags', AITags);
   console.log('AITitles', AITitles);
@@ -162,6 +164,43 @@ function Jodit() {
 
   console.log('Jodit curBowl', curBowl)
 
+  const addToBowl = async (link) => {
+    dispatch(spinnerSetStatus(true));
+    // console.log(login.accountId, fill.currentBowl, link);
+
+    // const request = {
+    //   url: `https://assets.aimixer.io:5002/urlToText`,
+    //   method: 'post',
+    //   data: {
+    //     url: link,
+    //     token: login.token,
+    //     accountId: login.accountId,
+    //     bowlId: fill.currentBowl,
+    //   }
+    // }
+
+    // try {
+    //   const response = await axios(request);
+    //   if (response.data.status !== 'success') {
+    //     dispatch(spinnerSetStatus(false));
+    //     dispatch(toastSet({color: 'danger', message: response.data.msg}));
+    //     return;
+    //   }
+
+    //   const { title, date, link, type, subtype, length, id } = response.data;
+
+      socketService.emit('addContentToBowl', {token: login.token, bowlId: curBowl.id, content: {title, date: DateTime.now().toISODate(), link: creationLink, type: 'html', subtype: "url", id: uuidv4(), length: content.split(' ').length}});
+
+    // } catch(err) {
+    //     dispatch(spinnerSetStatus(false));
+    //     dispatch(toastSet({color: 'danger', message: 'Could not add link to bowl.'}));
+    //     console.error(err);
+    //     return;
+    // }
+
+    dispatch(spinnerSetStatus(false));
+  }
+
   const getAITagsTitles = async () => {
     if(window.fetchingTags) return;
     else window.fetchingTags = true;
@@ -202,7 +241,6 @@ function Jodit() {
     data = paragraphs.join("\n");
     window.theContent = data;
     setContent(data);
-    await getAITagsTitles();
   }
 
   
@@ -212,9 +250,9 @@ function Jodit() {
     else window.fetchingContent = true;
     try {
       const response = await axios.get(curBowl.creations[index]);
+      setCreationLink(curBowl.creations[index]);
       setTheContent(response.data);
       setCreation(`creation-${index}`);
-      if (!window.fetchingTags) getAITagsTitles();
     } catch (err) {
       console.error(err);
     }
@@ -271,7 +309,11 @@ const fetchOutputs = async () => {
 
   return (
     <div className='Jodit'>
-        <IonButton className='Jodit__Button-Back' color={'primary'} onClick={handleUpload}>Upload</IonButton>
+      <div className='Mix__Actions-Container'>
+        <IonButton className='Jodit__Action-Button' color={'primary'} onClick={handleUpload}>Upload</IonButton>
+        <IonButton className='Jodit__Action-Button' onClick={getAITagsTitles}>AI Titles</IonButton>
+        <IonButton className='Jodit__Action-Button' onClick={addToBowl}>In BOWL</IonButton>
+      </div>
         {/* {login.domain === '@pymnts.com' && <IonCheckbox className='Jodit__AI-Tags' labelPlacement="end" checked={useAITags} onIonChange={(e) => setUseAITags(e.target.checked)}>
             Add Tags
           </IonCheckbox>
@@ -322,9 +364,9 @@ const fetchOutputs = async () => {
             </IonSelect>
           </IonItem>
          }
-          <IonButton className='Jodit__AI-Titles-Button' onClick={getAITagsTitles}>AI</IonButton>
+          
         </div>
-        {login.domain === '@pymnts.com' && <IonItem style={{width: "calc(100% - 3.75rem)"}}>
+        {login.domain === '@pymnts.com' && <IonItem >
             <IonSelect label="Type" placeholder={'post'} value={output} onIonChange={(e) => {
               setOutput(e.target.value)
             }}>

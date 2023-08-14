@@ -75,13 +75,15 @@ function Mix() {
     })
   return (
     <div className='Mix'>
-        <IonButton className='Mix__Button-Mix' color={'primary'} onClick={() => socketService.emit('mix', {login, bowls, mix, bowlId: curBowl.id})}>Mix</IonButton>
+        <div className='Mix__Actions-Container'>
+            <IonButton className='Mix__Button-Mix' color={'primary'} onClick={() => socketService.emit('mix', {login, bowls, mix, bowlId: curBowl.id})}>Mix</IonButton>
+            <IonButton className='Mix__Button-Apply' color={'primary'} onClick={handleApply}>Set Topics</IonButton>
+        </div>
         <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
         <h2 className="Mix__Length">{mixLength} Words</h2>
         <IonItem>
             <IonTextarea rows={4} label="Topics" placeholder="All" value={mix.topics} onIonChange={handleSetTopics}></IonTextarea>
         </IonItem>
-        <IonButton className='Mix__Button-Apply' color={'primary'} onClick={handleApply}>Set Topics</IonButton>
         <h2 className="Mix__Subtitle">Contents</h2>
         <div className="Mix__Contents-Container">
             {curBowl.contents.map(c => {

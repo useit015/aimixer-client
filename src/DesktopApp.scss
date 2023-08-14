@@ -31,8 +31,8 @@ body {
         @media screen and (min-width: 786px) {
             position: fixed;
             width: 99%;
-            justify-content: flex-end;
-            margin-right: 1rem;
+            justify-content: flex-start;
+            margin-left: 1rem;
         }
     }
     &__Nav-Icon {

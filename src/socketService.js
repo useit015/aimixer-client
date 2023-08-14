@@ -137,4 +137,7 @@ export const setupTheSocket = (socketio, url, store) => {
 
 }
 
-export const emit = (event, ...args) => socket.emit(event, ...args);
+export const emit = (event, ...args) => {
+    console.log('socket emit', event, ...args);
+    socket.emit(event, ...args);
+}
