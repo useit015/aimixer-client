@@ -46,5 +46,9 @@ body {
         align-items: center;
         cursor: pointer;
         margin: .25rem;
+
+        &--selected {
+            background-color: var(--ion-icon-selected);
+        }
     }
 }

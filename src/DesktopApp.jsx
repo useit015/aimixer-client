@@ -15,6 +15,7 @@ import { RiBlenderLine } from 'react-icons/ri';
 import { PiArticle } from 'react-icons/pi';
 import { loginSetMode } from './store/sliceLogin';
 import { TbBowl } from 'react-icons/tb';
+import { GiBowlSpiral } from 'react-icons/gi';
 
 const DesktopApp = () => {
 
@@ -34,9 +35,11 @@ const DesktopApp = () => {
       <IonPage>
         <IonContent>
           <div className='DesktopApp__Navigation'>
-            {login.mode !== 'bowls' && curBowl && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>}
-            {login.mode !== 'bowls' && curBowl && curBowl.contents.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
-            {login.mode !== 'bowls' && curBowl && curBowl.creations.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }  
+            {login.isLoggedIn && <div className={login.mode !== 'bowls' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('bowls'))}}><GiBowlSpiral color="white" /></div> }
+            {login.isLoggedIn && curBowl && <div className={login.mode !== 'fill' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color={"white"} /></div>}
+            {login.isLoggedIn && curBowl && curBowl.contents.length && <div className={login.mode !== 'mix' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+            {login.isLoggedIn && curBowl && curBowl.creations.length && <div className={login.mode !== 'jodit' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> } 
+            
           </div>
           <img className='DesktopApp__Logo' src={Logo} />
           <div className="DesktopApp__Catch-Phrase">Mix Anything into Anything</div>

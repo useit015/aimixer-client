@@ -7,6 +7,7 @@ https://ionicframework.com/docs/v6/theming/colors
 :root {
   --ion-background-color: #f4f3f2;
   --ion-card-background-color: #F9F9F7;
+  --ion-icon-selected: #abaecb;
   /** primary **/
   --ion-color-primary: #414568;
 	--ion-color-primary-rgb: 65,69,104;

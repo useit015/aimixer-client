@@ -207,6 +207,7 @@ function Jodit() {
 
   
   const fetchContent = async (index) => {
+    console.log('fetchContent');
     if(window.fetchingContent) return;
     else window.fetchingContent = true;
     try {
@@ -217,7 +218,7 @@ function Jodit() {
     } catch (err) {
       console.error(err);
     }
-    delete window.fetchContent;
+    delete window.fetchingContent;
   }
 
   const config3 = useMemo(
@@ -336,14 +337,12 @@ const fetchOutputs = async () => {
         }
        
         <JoditEditor
-          
           ref={editor}
           value={content}
           config={config3}
           tabIndex={1} // tabIndex of textarea
           onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
           onChange={newContent => {console.log('hello')}}
-          
         />
        
         
