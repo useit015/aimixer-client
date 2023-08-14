@@ -34,9 +34,9 @@ const DesktopApp = () => {
       <IonPage>
         <IonContent>
           <div className='DesktopApp__Navigation'>
-            {curBowl && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>}
-            {curBowl.contents.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
-            {curBowl.creations.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }  
+            {login.mode !== 'bowls' && curBowl && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>}
+            {login.mode !== 'bowls' && curBowl.contents.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+            {login.mode !== 'bowls' && curBowl.creations.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }  
           </div>
           <img className='DesktopApp__Logo' src={Logo} />
           <div className="DesktopApp__Catch-Phrase">Mix Anything into Anything</div>

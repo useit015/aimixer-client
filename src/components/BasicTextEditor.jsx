@@ -14,6 +14,10 @@ function BasicTextEditor() {
 
   const basicEditor = useSelector(state => state.basicEditor);
   const login = useSelector(state => state.login)
+  const fill = useSelector(state => state.fill);
+  const bowls = useSelector(state => state.bowls);
+  const curBowl = bowls.find(b => b.id == fill.currentBowl);
+  
   const dispatch = useDispatch();
 
   console.log('basicEditor', basicEditor)
@@ -95,7 +99,7 @@ function BasicTextEditor() {
   return (
     <div className='BasicTextEditor'>
       <IonButton className='BasicTextEditor__Button-Done' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
-      <h1 className="BasicTextEditor__Title">Edit</h1>
+      <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
       <IonItem>
           <IonInput className='BasicEditor__SeachTerm' placeholder="Search" value={basicEditor.searchTerm} onIonChange={(e) => dispatch(basicEditorSetSearchTerm(e.target.value))} />
           <div className='BasicTextEditor__SearchCount'>{count}</div>

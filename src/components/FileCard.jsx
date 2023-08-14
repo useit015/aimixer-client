@@ -147,7 +147,8 @@ function FileCard({file, deleteFile}) {
 
         response = await axios(request);
 
-        const { title, date, link, type, subtype, length, id } = response.data;
+        let { title, date, link, type, subtype, length, id } = response.data;
+        if (speakerTranscript) type = 'transcript';
         socketService.emit('addContentToBowl', {token: login.token, bowlId: fill.currentBowl, content: {title, date, link, type, subtype, id, length}});
     
       } catch(err) {
