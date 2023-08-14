@@ -11,13 +11,20 @@ import GridLoader from 'react-spinners/GridLoader';
 import Mix from './components/Mix';
 import BasicTextEditor from './components/BasicTextEditor';
 import Jodit from './components/Jodit';
+import { RiBlenderLine } from 'react-icons/ri';
+import { PiArticle } from 'react-icons/pi';
+import { loginSetMode } from './store/sliceLogin';
+import { TbBowl } from 'react-icons/tb';
 
 const DesktopApp = () => {
 
   const login = useSelector(state => state.login);
   const toast = useSelector(state => state.toast);
   const spinner = useSelector(state => state.spinner);
+  const fill = useSelector(state => state.fill);
+  const bowls = useSelector(state => state.bowls);
 
+  const curBowl = bowls.find(b => b.id == fill.currentBowl);
   console.log(toast);
 
   const dispatch = useDispatch();
@@ -26,6 +33,11 @@ const DesktopApp = () => {
     <IonApp>
       <IonPage>
         <IonContent>
+          <div className='DesktopApp__Navigation'>
+            {curBowl && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>}
+            {curBowl.contents.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+            {curBowl.creations.length > 0 && <div className='DesktopApp__Nav-Icon' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }  
+          </div>
           <img className='DesktopApp__Logo' src={Logo} />
           <div className="DesktopApp__Catch-Phrase">Mix Anything into Anything</div>
           {!login.isLoggedIn && <Login /> }
@@ -47,6 +59,7 @@ const DesktopApp = () => {
       {spinner.status && <div style={{height: '100vh', width: '100vw', position: 'fixed', top: '0', left: '0', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 100}}>
           <GridLoader color='var(--ion-color-primary)' height='3rem' />
       </div> }
+      
     </IonApp>
   )
 }

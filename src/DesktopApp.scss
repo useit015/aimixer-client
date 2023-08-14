@@ -23,4 +23,28 @@ body {
         //font-weight: bold;
         font-style: italic;
     }
+    &__Navigation {
+        display: flex;
+        justify-content: center;
+        margin-top: .5rem;
+
+        @media screen and (min-width: 786px) {
+            position: fixed;
+            width: 99%;
+            justify-content: flex-end;
+            margin-right: 1rem;
+        }
+    }
+    &__Nav-Icon {
+        background-color: var(--ion-color-primary);
+        color: var(--ion-color-primary-contrast);
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: .25rem;
+    }
 }

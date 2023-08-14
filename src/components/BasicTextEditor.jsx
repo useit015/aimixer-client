@@ -6,6 +6,7 @@ import { basicEditorSetContent, basicEditorSetReplaceTerm, basicEditorSetSearchT
 import axios from 'axios';
 import { toastSet } from '../store/sliceToast';
 import { loginSetMode } from '../store/sliceLogin';
+import { spinnerSetStatus } from '../store/sliceSpinner';
 
 function BasicTextEditor() {
   const [count, setCount] = useState();
@@ -64,6 +65,7 @@ function BasicTextEditor() {
   }
 
   const handleSave = async () => {
+    dispatch(spinnerSetStatus(true));
     let request = {
       url: `https://assets.aimixer.io:5002/updateLink`,
       method: 'post',
@@ -79,7 +81,10 @@ function BasicTextEditor() {
     } catch (err) {
       console.error(err);
       dispatch(toastSet({color: 'danger', message: 'Error saving content.'}));
+      
     }
+    dispatch(spinnerSetStatus(false));
+    dispatch(loginSetMode('mix'));
   }
   
   useEffect(() => {

@@ -81,8 +81,8 @@ function Fill() {
         {curBowl.source === 'file' && <File />}
         
       </div>
-      {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
-      {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }
+      {/* {curBowl.contents.length > 0 && <div className='Fill__Num-Contents' onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+      {curBowl.creations.length > 0 && <div className='Fill__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> } */}
     </div>
   )
 }

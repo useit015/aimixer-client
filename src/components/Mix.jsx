@@ -89,8 +89,8 @@ function Mix() {
             })}
         </div>
 
-        <div className='Mix__Num-Contents' onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color="white" /></div>
-        {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> }
+        
+        {/* {curBowl.creations.length > 0 && <div className='Mix__Num-Creations' onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> } */}
     </div>
   )
 }
