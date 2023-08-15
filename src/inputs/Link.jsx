@@ -68,7 +68,7 @@ function Link() {
           <IonInput placeholder="Enter link" value={url} onIonChange={(e) => setUrl(e.target.value)} />
         </IonItem>
       </div>
-      <IonButton className='Link__Submit-Button' color={'primary'} onClick={() => {
+      <IonButton className='Link__Submit-Button' color={'primary'} fill="outline" onClick={() => {
         handleLink();
       }}>Submit</IonButton>
     </div>

@@ -1,0 +1,11 @@
+.TextInput {
+
+    &__Textarea {
+        height: 50vh;
+    }
+    &__Button {
+        width: fit-content;
+        display: block;
+        margin: .5rem auto;
+    }
+}

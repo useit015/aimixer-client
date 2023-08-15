@@ -9,6 +9,9 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: var(--ion-card-background-color);
     padding: .25rem .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     &__Name {
         text-align: center;

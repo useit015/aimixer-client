@@ -38,19 +38,25 @@ function BowlCard({bowl}) {
 
   return (
     <div className="BowlCard">
-        {mode === 'display' && <h2 className="BowlCard__Name">{bowl.name}</h2>}
-        {mode === 'edit' && <input className="BowlCard__Input-Name" type='text' value={name} onChange={(e) => setName(e.target.value)} />}
-        <p className="BowlCard__Creator">{bowl.creator}</p>
-        <IonButton className='BowlCard__FillButton' onClick={handleMainButton}>
-            {mode === 'display' ? 'Fill' : 'Change'}
-        </IonButton>
-        <div className="BowlCard__Action-Container">
-          <FiEdit color='var(--ion-color-primary)' size="1.85rem" 
-          onClick={() => {
-            const newMode = mode === 'display' ? 'edit' : 'display';
-            setMode(newMode); 
-          }} />
-          <MdOutlineDeleteOutline color="var(--ion-color-danger)" size="2rem" onClick={deleteBowl}/>
+        <div className="BowlCard__Top">
+          {mode === 'display' && <h2 className="BowlCard__Name">{bowl.name}</h2>}
+          {mode === 'edit' && <input className="BowlCard__Input-Name" type='text' value={name} onChange={(e) => setName(e.target.value)} />}
+          <p className="BowlCard__Creator">{bowl.creator}</p>
+          <IonButton className='BowlCard__FillButton' fill='outline' onClick={handleMainButton}>
+              {mode === 'display' ? 'Fill' : 'Change'}
+          </IonButton>
+        </div>
+
+        <div className="BowlCard__Bottom">
+        
+          <div className="BowlCard__Action-Container">
+            <FiEdit color='var(--ion-color-primary)' size="1.85rem" 
+            onClick={() => {
+              const newMode = mode === 'display' ? 'edit' : 'display';
+              setMode(newMode); 
+            }} />
+            <MdOutlineDeleteOutline color="var(--ion-color-danger)" size="2rem" onClick={deleteBowl}/>
+          </div>
         </div>
     </div>
   )

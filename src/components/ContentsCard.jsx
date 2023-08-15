@@ -52,7 +52,7 @@ function ContentsCard({content}) {
               handleEdit();
             }} />
 
-            <IonButton className='ContentsCard__Button-Date' onClick={() => {
+            <IonButton className='ContentsCard__Button-Date' fill="outline" onClick={() => {
               const curVal = showPicker;
               setShowPicker(!curVal)
               }}>{theDate}</IonButton>

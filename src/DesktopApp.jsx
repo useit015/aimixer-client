@@ -37,8 +37,8 @@ const DesktopApp = () => {
           <div className='DesktopApp__Navigation'>
             {login.isLoggedIn && <div className={login.mode !== 'bowls' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('bowls'))}}><GiBowlSpiral color="white" /></div> }
             {login.isLoggedIn && curBowl && <div className={login.mode !== 'fill' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('fill'))}}><TbBowl color={"white"} /></div>}
-            {login.isLoggedIn && curBowl && curBowl.contents.length && <div className={login.mode !== 'mix' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
-            {login.isLoggedIn && curBowl && curBowl.creations.length && <div className={login.mode !== 'jodit' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> } 
+            {login.isLoggedIn && curBowl && curBowl.contents.length > 0 && <div className={login.mode !== 'mix' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('mix'))}}><RiBlenderLine color="white"/></div> }
+            {login.isLoggedIn && curBowl && curBowl.creations.length > 0 && <div className={login.mode !== 'jodit' ? 'DesktopApp__Nav-Icon' : 'DesktopApp__Nav-Icon DesktopApp__Nav-Icon--selected'} onClick={() => {dispatch(loginSetMode('jodit'))}}><PiArticle color="white" /></div> } 
             
           </div>
           <img className='DesktopApp__Logo' src={Logo} />

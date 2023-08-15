@@ -15,10 +15,14 @@ function SiteSearch() {
   const [index, setIndex] = useState('google_search_news'); 
   const [results, setResults] = useState([]);
   
-
   const dispatch = useDispatch();
   const login = useSelector(state => state.login);
   const spinner = useSelector(state => state.spinner);
+  const fill = useSelector(state => state.fill);
+  const bowls = useSelector(state => state.bowls);
+  const curBowl = bowls.find(b => b.id == fill.currentBowl);
+
+  const filteredResults = results.filter(r => curBowl.contents.find(c => c.id === r.id) ? false : true);
 
   const timePeriods = [
     {id: 'last_hour', name: 'Hour'},
@@ -103,7 +107,7 @@ function SiteSearch() {
         </div>
         </IonRadioGroup>
       </div>
-      <IonButton className='GoogleSearch__Submit-Button' color={'primary'} onClick={() => {
+      <IonButton className='GoogleSearch__Submit-Button' color={'primary'} fill='outline' onClick={() => {
         if (!term) return dispatch(toastSet({color: 'danger', message: "Missing search term."}));
         if (term.length < 2) return dispatch(toastSet({color: 'danger', message: "Invalid search term."}));
         
@@ -111,7 +115,7 @@ function SiteSearch() {
         handleSearch();
       }}>Submit</IonButton>
       <div className="GoogleSearch__Results">
-        {results.map(r => <SearchResultCard key={r.id} result={r} />)}
+        {filteredResults.map(r => <SearchResultCard key={r.id} result={r} />)}
       </div>
     </div>
   )

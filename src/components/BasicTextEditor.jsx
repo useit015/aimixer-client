@@ -98,7 +98,11 @@ function BasicTextEditor() {
 
   return (
     <div className='BasicTextEditor'>
-      <IonButton className='BasicTextEditor__Button-Done' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
+       <div className='BasicTextEditor__Actions-Container'>
+            <IonButton className='BasicTextEditor__Action-Button' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
+            <IonButton className='BasicTextEditor__Action-Button' color={'primary'} onClick={() => {dispatch(loginSetMode('mix'))}}>Back</IonButton>
+        </div>
+      
       <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
       <IonItem>
           <IonInput className='BasicEditor__SeachTerm' placeholder="Search" value={basicEditor.searchTerm} onIonChange={(e) => dispatch(basicEditorSetSearchTerm(e.target.value))} />
@@ -107,7 +111,7 @@ function BasicTextEditor() {
         <IonItem>
           <IonInput className='BasicTextEditor__ReplaceTerm' placeholder="Replace" value={basicEditor.replaceTerm} onIonChange={(e) => dispatch(basicEditorSetReplaceTerm(e.target.value))} />
         </IonItem>
-        <IonButton className='BasicTextEditor__Replace-Button' color={"primary"}
+        <IonButton className='BasicTextEditor__Replace-Button' fill='outline' color={"primary"}
           onClick={(e) => {
             const re = new RegExp(basicEditor.searchTerm, "gi");
             const content = basicEditor.content.replaceAll(re, basicEditor.replaceTerm);
