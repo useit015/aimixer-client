@@ -75,7 +75,7 @@ function SiteSearch() {
         </IonItem>
       </div>
       <div className="GoogleSearch__Time-Period">
-        <IonRadioGroup value={timePeriod}>
+        <IonRadioGroup value={timePeriod} onIonChange={(e) => setTimePeriod(e.target.value)}>
         <div style={{display: 'flex', justifyContent:'center', marginTop: '1rem'}}>
           {timePeriods.map(tp => {
             return (
@@ -90,7 +90,7 @@ function SiteSearch() {
         </IonRadioGroup>
       </div>
       <div className="GoogleSearch__Indexes">
-        <IonRadioGroup value={index}>
+        <IonRadioGroup value={index} onIonChange={(e) => setIndex(e.target.value)}>
         <div style={{display: 'flex', justifyContent:'center', margin: '1rem .5rem 0 .5rem'}}>
           {indexes.map(tp => {
             return (

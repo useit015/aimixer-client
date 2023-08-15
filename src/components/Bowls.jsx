@@ -13,13 +13,14 @@ function Bowls() {
 
     const login = useSelector(state => state.login);
     const bowls = useSelector(state => state.bowls);
-
+    const servers = useSelector(state => state.servers)
 
 
     console.log('login', login);
     console.log('bowls', bowls);
 
-    socketService.setupTheSocket(io, `https://api.aimixer.io:5000`, store);
+
+    socketService.setupTheSocket(io, `${servers.api[servers.mode]}`, store);
 
     const getBowls = () => {
       socketService.emit('getBowls', login.token);

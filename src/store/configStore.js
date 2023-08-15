@@ -6,6 +6,7 @@ import fillReducer from './sliceFill';
 import spinnerReducer from './sliceSpinner';
 import mixReducer from './sliceMix';
 import basicEditorReducer from './sliceBasicEditor';
+import serversReducer from './sliceServers';
 
 export const store = configureStore({ 
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
        fill: fillReducer,
        spinner: spinnerReducer,
        mix: mixReducer,
-       basicEditor: basicEditorReducer
+       basicEditor: basicEditorReducer,
+       servers: serversReducer
        
     }
 });

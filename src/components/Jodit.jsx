@@ -23,6 +23,7 @@ function Jodit() {
   const fill = useSelector(state => state.fill);
   const bowls = useSelector(state => state.bowls);
   const mix = useSelector(state => state.mix);
+  const servers = useSelector(state => state.servers);
   
   const dispatch = useDispatch();
 
@@ -206,7 +207,7 @@ function Jodit() {
     else window.fetchingTags = true;
     
     const request = {
-      url: `https://api.aimixer.io:5000/getTagsTitles`,
+      url: `${servers[servers.mode].api}/getTagsTitles`,
       method: 'post',
       data: {
         token: login.token,
