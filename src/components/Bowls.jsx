@@ -1,12 +1,13 @@
 import './Bowls.scss';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { store } from '../store/configStore';
 import * as socketService from '../socketService';
 import { IonButton, IonFab, IonFabButton, IonIcon, IonInput, IonItem } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import BowlCard from './BowlCard';
+import { toastSet } from '../store/sliceToast';
 
 function Bowls() {
     const [name, setName] = useState('')
@@ -15,6 +16,7 @@ function Bowls() {
     const bowls = useSelector(state => state.bowls);
     const servers = useSelector(state => state.servers)
 
+    const dispatch = useDispatch();
 
     console.log('login', login);
     console.log('bowls', bowls);
@@ -31,6 +33,7 @@ function Bowls() {
     }, [])
 
     const addBowl = () => {
+      if (!name) return dispatch(toastSet({color: 'danger', message: 'Please enter a name'}));
       socketService.emit('addBowl', {name, token: login.token})
       setName('');
     }

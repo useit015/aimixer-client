@@ -36,8 +36,8 @@ function Link() {
         return;
       }
 
-      const { title, date, link, type, subtype, length, id } = response.data;
-      socketService.emit('addContentToBowl', {token: login.token, bowlId: fill.currentBowl, content: {title, date, link, type, subtype, id, length}});
+      const { title, date, link, type, subtype, length, id, origURL } = response.data;
+      socketService.emit('addContentToBowl', {token: login.token, bowlId: fill.currentBowl, content: {title, date, link, type, subtype, id, length, origURL: link}});
 
     } catch(err) {
         dispatch(spinnerSetStatus(false));

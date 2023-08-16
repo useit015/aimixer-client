@@ -4,11 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const outputs = [
     {id: 'newsArticle', name: 'News Article'},
     {id: 'blogPost', name: 'Blog Post'},
-    {id: 'landingPage', name: 'Landing Page'},
-    {id: 'salesEmail', name: 'Sales Email'},
-    {id: 'productDescription', name: 'Product Description'},
-    {id: 'code', name: 'Programming Code'},
-    {id: 'list', name: 'List'},
+    {id: 'interactiveOutline', name: 'Interactive Outline'},
     {id: 'custom', name: 'Custom'},
 ]
 

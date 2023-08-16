@@ -149,7 +149,7 @@ function FileCard({file, deleteFile}) {
 
         let { title, date, link, type, subtype, length, id } = response.data;
         if (speakerTranscript) type = 'transcript';
-        socketService.emit('addContentToBowl', {token: login.token, bowlId: fill.currentBowl, content: {title, date, link, type, subtype, id, length}});
+        socketService.emit('addContentToBowl', {token: login.token, bowlId: fill.currentBowl, content: {title, date, link, type, subtype, id, length, origURL: ''}});
     
       } catch(err) {
         console.error('error', err);
@@ -165,14 +165,14 @@ function FileCard({file, deleteFile}) {
     <div className="FileCard">
         {mode === 'display' && <h2 className="FileCard__Name" onClick={() => setMode('edit')}>{name}</h2>}
         {mode === 'edit' && <textarea rows={4} className="FileCard__Input-Name" type='text' value={name} onChange={(e) => setName(e.target.value)} onBlur={() => setMode('display')}/>}
-        <IonButton className='FileCard__Button-Date' onClick={() => {
+        <IonButton className='FileCard__Button-Date' fill='outline' onClick={() => {
               const curVal = showPicker;
               setShowPicker(!curVal)
               }}>{DateTime.fromISO(ISODate).toFormat('MMMM dd, yyyy')}
         </IonButton>
         {showPicker && <IonDatetime className='FileCard__Date-Picker' value={ISODate} presentation='date' onIonChange={(e) => setISODate(e.target.value)}></IonDatetime>}
         <div>
-          <IonButton className='BowlCard__FillButton' onClick={handleAddFile}>
+          <IonButton className='BowlCard__FillButton' fill='outline' onClick={handleAddFile}>
               {'Add'}
           </IonButton>
           {(isVideo || isAudio) && <IonCheckbox className='FileCard__Speaker-Checkbox' labelPlacement="end" checked={speakerTranscript} onIonChange={(e) => {

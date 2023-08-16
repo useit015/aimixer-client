@@ -4,13 +4,6 @@
     margin: 1.5rem auto 0 auto;
     position: relative;
 
-    &__Actions-Container {
-        display: flex;
-        flex-direction: column;
-        top: 1rem;
-        right: 1rem;
-        position: fixed;
-    }
     &__Title {
         color: var(--ion-color-primary);
         text-align: center;

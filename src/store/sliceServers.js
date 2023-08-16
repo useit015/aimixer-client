@@ -2,16 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const sliceServers = createSlice({
     name: 'servers',
-    initialState: {mode: 'dev', api: {dev: 'https://api.aimixer.io:5300', prod: 'https://api.aimixer.io:5000'}},
+    initialState: {mode: 'prod', api: {dev: 'https://api.aimixer.io:5300', prod: 'https://api.aimixer.io:5000'}},
     reducers: {
         spinnerSetStatus: (state, action) => {
             state.status = action.payload;
             return state;
         },
-        spinnerSetType: (state, action) => {
-            state.type = action.payload;
-            return state;
-        }
 
     }
 });

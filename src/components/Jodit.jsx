@@ -207,7 +207,7 @@ function Jodit() {
     else window.fetchingTags = true;
     
     const request = {
-      url: `${servers[servers.mode].api}/getTagsTitles`,
+      url: `${servers.api[servers.mode]}/getTagsTitles`,
       method: 'post',
       data: {
         token: login.token,
@@ -310,10 +310,10 @@ const fetchOutputs = async () => {
 
   return (
     <div className='Jodit'>
-      <div className='Mix__Actions-Container'>
-        <IonButton className='Jodit__Action-Button' color={'primary'} onClick={handleUpload}>Upload</IonButton>
-        <IonButton className='Jodit__Action-Button' onClick={getAITagsTitles}>AI Titles</IonButton>
-        <IonButton className='Jodit__Action-Button' onClick={addToBowl}>In BOWL</IonButton>
+      <div className='Actions-Container'>
+        <IonButton className='Action-Button' color={'primary'} onClick={handleUpload}>Upload</IonButton>
+        <IonButton className='Action-Button' onClick={getAITagsTitles}>AI Titles</IonButton>
+        <IonButton className='Action-Button' onClick={addToBowl}>In BOWL</IonButton>
       </div>
         {/* {login.domain === '@pymnts.com' && <IonCheckbox className='Jodit__AI-Tags' labelPlacement="end" checked={useAITags} onIonChange={(e) => setUseAITags(e.target.checked)}>
             Add Tags
