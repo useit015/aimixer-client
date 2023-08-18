@@ -2,7 +2,7 @@
     
     border: 1px solid var(--ion-color-primary);
     border-radius: 4px;
-    margin: 1rem 0;
+    margin: .5rem 0;
     width: 100%;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -14,9 +14,11 @@
 
     @media screen and (min-width: 600px) {
         width: 48%;
+        margin: .75rem 0;
     }
 
     @media screen and (min-width: 800px) {
+        margin: 1rem 0;
         width: 30%;
     }
 

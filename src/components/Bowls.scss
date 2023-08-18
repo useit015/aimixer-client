@@ -1,8 +1,13 @@
 .Bowls {
-    max-width: 900px;
+    
     display: block;
     margin: 1.5rem auto 0 auto;
-    
+    width: 90%;
+
+    @media screen and (min-width: 900px) {
+        max-width: 900px;
+    }
+
     &__Title {
         color: var(--ion-color-primary);
         text-align: center;

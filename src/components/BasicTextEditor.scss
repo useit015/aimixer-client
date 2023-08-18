@@ -4,17 +4,7 @@
     margin: 1.5rem auto 0 auto;
     position: relative;
 
-    &__Actions-Container {
-        display: flex;
-        flex-direction: column;
-        top: 1rem;
-        right: 1rem;
-        position: fixed;
-    }
-    &__Action-Button {
-        width: 9rem;
-        margin-bottom: .25rem;
-    }
+
     &__Button-Done {
         display: block;
         margin: auto;

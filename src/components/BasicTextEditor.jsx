@@ -98,9 +98,9 @@ function BasicTextEditor() {
 
   return (
     <div className='BasicTextEditor'>
-       <div className='BasicTextEditor__Actions-Container'>
-            <IonButton className='BasicTextEditor__Action-Button' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
-            <IonButton className='BasicTextEditor__Action-Button' color={'primary'} onClick={() => {dispatch(loginSetMode('mix'))}}>Back</IonButton>
+       <div className='Actions-Container'>
+            <IonButton className='Action-Button' color={'primary'} onClick={() => {dispatch(handleSave)}}>Save</IonButton>
+            <IonButton className='Action-Button' color={'primary'} onClick={() => {dispatch(loginSetMode('mix'))}}>Back</IonButton>
         </div>
       
       <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
