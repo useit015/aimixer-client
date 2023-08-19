@@ -82,6 +82,18 @@ const bowlsSlice = createSlice({
                 return state;
             }
         },
+        bowlsSetFacts: (state, action) => {
+            const { bowlId, info } = action.payload;
+            const bowl = state.find(s => s.id === bowlId);
+            if (bowl) {
+                for (let i = 0; i < info.length; ++i) {
+                    const content = bowl.contents[i];
+                    if (!content) continue;
+                    content.facts = info[i];
+                }
+                return state;
+            }
+        },
         bowlsAddCreation: (state, action) => {
             const { bowlId, creation } = action.payload;
             const bowl = state.find(s => s.id === bowlId);
@@ -109,6 +121,6 @@ const bowlsSlice = createSlice({
     }
 });
 
-export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl, bowlsChangeContentDate, bowlsSetInfo, bowlsSetCustomInstructions  } = bowlsSlice.actions;
+export const { bowlsAddBowl, bowlsSetBowls, bowlsDeleteBowl, bowlsChangeContentDate, bowlsSetInfo, bowlsSetFacts, bowlsSetCustomInstructions  } = bowlsSlice.actions;
 
 export default bowlsSlice.reducer;

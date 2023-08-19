@@ -7,7 +7,7 @@ import { mixSetTopics } from '../store/sliceMix';
 import ContentsCard from './ContentsCard';
 import { spinnerSetStatus } from '../store/sliceSpinner';
 import axios from 'axios'
-import { bowlsSetInfo } from '../store/sliceBowls';
+import { bowlsSetFacts, bowlsSetInfo } from '../store/sliceBowls';
 import * as socketService from '../socketService';
 import { TbBowl } from 'react-icons/tb';
 import { PiArticle } from 'react-icons/pi';
@@ -83,6 +83,7 @@ function Mix() {
             const results = await Promise.all(promises);
             const facts = results.map(r => r.data);
             console.log('FACT RESULTS', facts);
+            dispatch(bowlsSetFacts({bowlId: curBowl.id, info: facts}))
         }
         catch (err) {
             console.error(err);
