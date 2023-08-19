@@ -35,7 +35,7 @@ function Mix() {
         dispatch(mixSetTopics(e.target.value))
         dispatch(spinnerSetStatus(true));
 
-        const promises = [];
+        let promises = [];
 
         for (let i = 0; i < curBowl.contents.length; ++i) {
             promises.push(axios({
@@ -63,6 +63,33 @@ function Mix() {
         } catch (err) {
             console.error(err)
         }
+
+        promises = [];
+
+        for (let i = 0; i < curBowl.contents.length; ++i) {
+            promises.push(axios({
+                url: `https://assets.aimixer.io:5002/topicsToFacts`,
+                method: 'post',
+                data: {
+                    topics: e.target.value,
+                    link: curBowl.contents[i].link,
+                    token: login.token,
+                    bowlId: curBowl.id
+                }
+            }))
+        }
+
+        try {
+            const results = await Promise.all(promises);
+            const facts = results.map(r => r.data);
+            console.log('FACT RESULTS', facts);
+        }
+        catch (err) {
+            console.error(err);
+        }
+
+
+
 
         dispatch(spinnerSetStatus(false));
     }

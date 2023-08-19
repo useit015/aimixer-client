@@ -26,6 +26,9 @@ function SearchResultCard({result}) {
         token: login.token,
         accountId: login.accountId,
         bowlId: fill.currentBowl,
+        options: {
+          markdown: true
+        }
       }
     }
 
