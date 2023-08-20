@@ -89,9 +89,6 @@ function Mix() {
             console.error(err);
         }
 
-
-
-
         dispatch(spinnerSetStatus(false));
     }
 
@@ -104,7 +101,7 @@ function Mix() {
   return (
     <div className='Mix'>
         <div className='Actions-Container'>
-            <IonButton className='Action-Button' color={'primary'} onClick={() => socketService.emit('mix', {login, bowls, mix, bowlId: curBowl.id})}>Mix</IonButton>
+            <IonButton className='Action-Button' color={'primary'} onClick={() => socketService.emit('mix', {login, currentBowl: curBowl, mix})}>Mix</IonButton>
             <IonButton className='Action-Button' color={'primary'} onClick={handleApply}>Set Topics</IonButton>
         </div>
         <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
