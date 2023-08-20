@@ -63,7 +63,7 @@ function SearchResultCard({result}) {
                 <div className="SearchResultCard__Domain">{result.domain}</div>
                 <div className="SearchResultCard__Date">{result.date}</div>
             </div>
-            <IonButton className="SearchResultCard__Select-Button" onClick={addToBowl}>Select</IonButton>
+            <IonButton className="SearchResultCard__Select-Button" onClick={addToBowl} fill='outline'>Select</IonButton>
        </div>
         
     </div>

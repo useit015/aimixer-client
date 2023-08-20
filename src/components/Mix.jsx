@@ -64,7 +64,12 @@ function Mix() {
             console.error(err)
         }
 
-        promises = [];
+       
+        dispatch(spinnerSetStatus(false));
+    }
+
+    const handleMix = async () => {
+        const promises = [];
 
         for (let i = 0; i < curBowl.contents.length; ++i) {
             promises.push(axios({
@@ -84,12 +89,12 @@ function Mix() {
             const facts = results.map(r => r.data);
             console.log('FACT RESULTS', facts);
             dispatch(bowlsSetFacts({bowlId: curBowl.id, info: facts}))
+            socketService.emit('mix', {login, currentBowl: curBowl, mix})
         }
         catch (err) {
             console.error(err);
         }
 
-        dispatch(spinnerSetStatus(false));
     }
 
     let mixLength = 0;
@@ -101,7 +106,7 @@ function Mix() {
   return (
     <div className='Mix'>
         <div className='Actions-Container'>
-            <IonButton className='Action-Button' color={'primary'} onClick={() => socketService.emit('mix', {login, currentBowl: curBowl, mix})}>Mix</IonButton>
+            <IonButton className='Action-Button' color={'primary'} onClick={handleMix}>Mix</IonButton>
             <IonButton className='Action-Button' color={'primary'} onClick={handleApply}>Set Topics</IonButton>
         </div>
         <h1 className="Mix__Title" onClick={() => dispatch(loginSetMode('bowls'))}>{curBowl.name}</h1>
