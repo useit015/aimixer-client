@@ -55,7 +55,7 @@ function SearchResultCard({result}) {
 
   return (
     <div className="SearchResultCard" >
-       <div style={{width: "96%", display: "flex", flexDirection: 'column'}}>
+       <div style={{width: "96%", display: "flex", flexDirection: 'column', margin: 'auto'}}>
             <a className="SearchResultCard__Title" href={result.link} target="_blank">
                 <h2 style={{fontSize: '1.2rem'}}>{result.title}</h2>
             </a>
@@ -63,7 +63,7 @@ function SearchResultCard({result}) {
                 <div className="SearchResultCard__Domain">{result.domain}</div>
                 <div className="SearchResultCard__Date">{result.date}</div>
             </div>
-            <IonButton className="SearchResultCard__Select-Button" onClick={addToBowl} fill='outline'>Select</IonButton>
+            <IonButton className="SearchResultCard__Select-Button" onClick={addToBowl} fill='outline'>Add</IonButton>
        </div>
         
     </div>

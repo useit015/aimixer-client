@@ -69,6 +69,7 @@ function Mix() {
     }
 
     const handleMix = async () => {
+        return socketService.emit('mix', {login, currentBowl: curBowl, mix})
         const promises = [];
 
         for (let i = 0; i < curBowl.contents.length; ++i) {
@@ -76,7 +77,7 @@ function Mix() {
                 url: `https://assets.aimixer.io:5002/topicsToFacts`,
                 method: 'post',
                 data: {
-                    topics: e.target.value,
+                    topics: mix.topics,
                     link: curBowl.contents[i].link,
                     token: login.token,
                     bowlId: curBowl.id

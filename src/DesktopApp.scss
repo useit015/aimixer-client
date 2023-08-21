@@ -4,9 +4,8 @@
     box-sizing: border-box;
 }
 
-body {
-    overflow-x: hidden;
-    background-color: red !important;
+ion-content {
+    --background: #fff url("./assets/images/background-min.jpg") no-repeat center center / cover;
 }
 
 

@@ -5,11 +5,14 @@ https://ionicframework.com/docs/v6/theming/colors
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-background-color: #f4f3f2;
-  --ion-card-background-color: #F9F9F7;
-  --ion-icon-selected: #abaecb;
+  /* --ion-background-color: #f4f3f2; */
+  --ion-background-color: #F7F7F8;
+  /* --ion-card-background-color: #ECECF1; */
+  --ion-card-background-color: rgba(236, 236, 241, 1);
+
+  --ion-icon-selected: #ACACBE;
   /** primary **/
-  --ion-color-primary: #414568;
+  --ion-color-primary: #40414F;
 	--ion-color-primary-rgb: 65,69,104;
 	--ion-color-primary-contrast: #ffffff;
 	--ion-color-primary-contrast-rgb: 255,255,255;

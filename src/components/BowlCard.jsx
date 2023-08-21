@@ -41,14 +41,14 @@ function BowlCard({bowl}) {
         <div className="BowlCard__Top">
           {mode === 'display' && <h2 className="BowlCard__Name">{bowl.name}</h2>}
           {mode === 'edit' && <input className="BowlCard__Input-Name" type='text' value={name} onChange={(e) => setName(e.target.value)} />}
-          <p className="BowlCard__Creator">{bowl.creator}</p>
-          <IonButton className='BowlCard__FillButton' fill='outline' onClick={handleMainButton}>
-              {mode === 'display' ? 'Fill' : 'Change'}
-          </IonButton>
+       
         </div>
 
         <div className="BowlCard__Bottom">
-        
+        <p className="BowlCard__Creator">{bowl.creator}</p>
+          <IonButton className='BowlCard__FillButton' fill='outline' onClick={handleMainButton}>
+              {mode === 'display' ? 'Select' : 'Change'}
+          </IonButton>
           <div className="BowlCard__Action-Container">
             <FiEdit color='var(--ion-color-primary)' size="1.85rem" 
             onClick={() => {

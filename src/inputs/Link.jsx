@@ -70,7 +70,7 @@ function Link() {
       </div>
       <IonButton className='Link__Submit-Button' color={'primary'} fill="outline" onClick={() => {
         handleLink();
-      }}>Submit</IonButton>
+      }}>Add</IonButton>
     </div>
   )
 }
