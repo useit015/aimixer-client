@@ -24,6 +24,7 @@ function Bowls() {
     console.log('login', login);
     console.log('bowls', bowls);
     console.log("user bowls", userBowls)
+    console.log("display by user is: ", displayByUser)
 
     socketService.setupTheSocket(io, `${servers.api[servers.mode]}`, store);
 
@@ -52,7 +53,6 @@ function Bowls() {
           <IonButton onClick={filterBowls}>
             <IonIcon icon={person} ></IonIcon>
           </IonButton>
-
           <IonItem className='Bowls__Name'>
               <IonInput  label="New Bowl" labelPlacement="floating" placeholder="Enter name" value={name} onInput={(e) => {
                 setName(e.target.value)
@@ -62,7 +62,7 @@ function Bowls() {
             <IonIcon icon={add} ></IonIcon>
           </IonButton>
         </div>
-        {displayByUser ? 
+        {!displayByUser ? 
             <div className="Bowls__List">
               { bowls.map(b => {
                   return <BowlCard key={b.id} bowl={b} />
