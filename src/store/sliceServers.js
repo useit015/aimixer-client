@@ -9,7 +9,7 @@ const sliceServers = createSlice({
       prod: 'https://api.aimixer.io:5000'
     },
     assets: {
-      dev: 'https://assets.aimixer.io:5002',
+      dev: 'https://localhost:5302',
       prod: 'https://assets.aimixer.io:5002'
     }
   },

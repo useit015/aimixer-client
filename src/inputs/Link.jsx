@@ -11,6 +11,7 @@ function Link() {
   const [url, setUrl] = useState('');
   const fill = useSelector(state => state.fill);
   const login = useSelector(state => state.login);
+  const servers = useSelector(state => state.servers);
   const dispatch = useDispatch();
 
   const addToBowl = async (link) => {
@@ -18,15 +19,15 @@ function Link() {
     console.log(login.accountId, fill.currentBowl, link);
 
     const request = {
-      url: `https://assets.aimixer.io:5002/urlToText`,
+      url: `${servers.assets[servers.mode]}/urlToText`,
       method: 'post',
       data: {
         url: link,
         token: login.token,
         accountId: login.accountId,
-        bowlId: fill.currentBowl,
+        bowlId: fill.currentBowl
       }
-    }
+    };
 
     try {
       const response = await axios(request);
