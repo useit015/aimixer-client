@@ -21,6 +21,12 @@
         flex-grow: 1;
         margin-right: 1rem;
     }
+    &__Search {
+        &-Field {
+            margin-left: 3.1063rem;
+            margin-right: 4.1063rem;
+        }
+    }
     &__List {
         display: flex;
         justify-content: space-between;
