@@ -15,9 +15,6 @@ function Bowls() {
     const [search, setSearch] = useState('');
     const [displayByUser, setDisplayByUser] = useState(false);
     const [displayedBowls, setDisplayedBowls] = useState(false);
-    const [count, setCount] = useState(0)
-    
-    
 
     const login = useSelector(state => state.login);
     const bowls = useSelector(state => state.bowls);
@@ -54,7 +51,8 @@ function Bowls() {
         // b.output
         const creator = b.creator.toLowerCase()
         const output = b.output.toLowerCase()
-        return creator.includes(inputed) || output.includes(inputed)
+        const name = b.name.toLowerCase();
+        return creator.includes(inputed) || output.includes(inputed) || name.includes(inputed)
       })
 
       setDisplayedBowls(filtered)
