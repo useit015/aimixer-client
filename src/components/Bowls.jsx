@@ -26,11 +26,6 @@ function Bowls() {
     useEffect( () => {
       setDisplayedBowls(bowls)
     }, [bowls])    
-    // console.log('login', login);
-    // console.log('bowls', bowls);
-    // console.log("user bowls", userBowls)
-    // console.log("display by user is: ", displayByUser)
-    // console.log("searchBowls", searchBowls)
 
     socketService.setupTheSocket(io, `${servers.api[servers.mode]}`, store);
 
@@ -43,12 +38,9 @@ function Bowls() {
     }, [])
    
     const handleSearch = (e) => {
-     
       setSearch(e.target.value);
-
       const filtered = bowls.filter(b => {
         const inputed = e.target.value.toLowerCase()
-        // b.output
         const creator = b.creator.toLowerCase()
         const output = b.output.toLowerCase()
         const name = b.name.toLowerCase();
@@ -56,16 +48,12 @@ function Bowls() {
       })
 
       setDisplayedBowls(filtered)
-      // setCount(prev => prev + 1)
-
     }
 
     const handleSearchCancel = () => {
       setSearch("");
       setDisplayedBowls(bowls);
     }
-
-    console.log(displayedBowls)
 
     const addBowl = () => {
       if (!name) return dispatch(toastSet({color: 'danger', message: 'Please enter a name'}));
