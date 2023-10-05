@@ -44,7 +44,7 @@ function Bowls() {
         const creator = b.creator.toLowerCase()
         const output = b.output.toLowerCase()
         const name = b.name.toLowerCase();
-        return creator.includes(inputed) || output.includes(inputed) || name.includes(inputed)
+        return creator.includes(inputed) || output.includes(inputed) || name.includes(inputed) || name.replaceAll(" ", "").includes(inputed.replaceAll(" ", ""))
       })
 
       setDisplayedBowls(filtered)
@@ -71,9 +71,6 @@ function Bowls() {
     <div className='Bowls'>
       <h1 className="Bowls__Title">Bowls</h1>
         <div className="Bowls__New-Container">
-          {/* <IonButton onClick={filterBowls}>
-            <IonIcon icon={person} ></IonIcon>
-          </IonButton> */}
           <IonItem className='Bowls__Name'>
               <IonInput  label="New Bowl" labelPlacement="floating" placeholder="Enter name" value={name} onInput={(e) => {
                 setName(e.target.value)
