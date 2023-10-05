@@ -14,7 +14,7 @@ function Bowls() {
     const [name, setName] = useState('');
     const [search, setSearch] = useState('');
     const [displayByUser, setDisplayByUser] = useState(false);
-    const [displayedBowls, setDisplayedBowls] = useState(false);
+    const [displayedBowls, setDisplayedBowls] = useState(null);
 
     const login = useSelector(state => state.login);
     const bowls = useSelector(state => state.bowls);
@@ -71,9 +71,9 @@ function Bowls() {
     <div className='Bowls'>
       <h1 className="Bowls__Title">Bowls</h1>
         <div className="Bowls__New-Container">
-          <IonButton onClick={filterBowls}>
+          {/* <IonButton onClick={filterBowls}>
             <IonIcon icon={person} ></IonIcon>
-          </IonButton>
+          </IonButton> */}
           <IonItem className='Bowls__Name'>
               <IonInput  label="New Bowl" labelPlacement="floating" placeholder="Enter name" value={name} onInput={(e) => {
                 setName(e.target.value)
@@ -85,13 +85,16 @@ function Bowls() {
         </div>
         <div className='Bowls__Search'>
           <IonItem className='Bowls__Search-Field'>
-                <IonInput  label="Search for Bowl" labelPlacement="floating" placeholder="Type bowl name" value={search} onInput={handleSearch}/>
+                <IonInput  label={displayByUser ? "Disable user view to search" : "Search for Bowl"} labelPlacement="floating" placeholder="Type bowl name" value={search} disabled={displayByUser ? "true": "false"} onInput={handleSearch}/>
                   {!search ? null :
-                    <IonButton onClick={handleSearchCancel} className='BowlCard__FillButton' fill='outline' >
+                    <IonButton onClick={handleSearchCancel} className='BowlCard__FillButton' fill='outline'>
                         X
                     </IonButton>
                   }
             </IonItem>
+              <IonButton onClick={filterBowls}>
+              <IonIcon icon={person} ></IonIcon>
+            </IonButton>
         </div>
         {!displayByUser ? 
             <div className="Bowls__List">
