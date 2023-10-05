@@ -62,6 +62,11 @@ function Bowls() {
 
     }
 
+    const handleSearchCancel = () => {
+      setSearch("");
+      setDisplayedBowls(bowls);
+    }
+
     console.log(displayedBowls)
 
     const addBowl = () => {
@@ -96,7 +101,7 @@ function Bowls() {
           <IonItem className='Bowls__Search-Field'>
                 <IonInput  label="Search for Bowl" labelPlacement="floating" placeholder="Type bowl name" value={search} onInput={handleSearch}/>
                   {!search ? null :
-                    <IonButton onClick={() => setSearch("")} className='BowlCard__FillButton' fill='outline' >
+                    <IonButton onClick={handleSearchCancel} className='BowlCard__FillButton' fill='outline' >
                         X
                     </IonButton>
                   }
