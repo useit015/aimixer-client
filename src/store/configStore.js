@@ -1,25 +1,26 @@
 import { configureStore } from '@reduxjs/toolkit';
-import loginReducer from './sliceLogin';
-import toastReducer from './sliceToast';
+import assistantReducer from './sliceAssistant';
+import basicEditorReducer from './sliceBasicEditor';
 import bowlsReducer from './sliceBowls';
 import fillReducer from './sliceFill';
-import spinnerReducer from './sliceSpinner';
+import loginReducer from './sliceLogin';
 import mixReducer from './sliceMix';
-import basicEditorReducer from './sliceBasicEditor';
 import serversReducer from './sliceServers';
+import spinnerReducer from './sliceSpinner';
+import toastReducer from './sliceToast';
 
-export const store = configureStore({ 
-    reducer: {
-       login: loginReducer,
-       toast: toastReducer,
-       bowls: bowlsReducer,
-       fill: fillReducer,
-       spinner: spinnerReducer,
-       mix: mixReducer,
-       basicEditor: basicEditorReducer,
-       servers: serversReducer
-       
-    }
+export const store = configureStore({
+  reducer: {
+    login: loginReducer,
+    toast: toastReducer,
+    bowls: bowlsReducer,
+    fill: fillReducer,
+    spinner: spinnerReducer,
+    assistant: assistantReducer,
+    mix: mixReducer,
+    basicEditor: basicEditorReducer,
+    servers: serversReducer
+  }
 });
 
-export default store
+export default store;

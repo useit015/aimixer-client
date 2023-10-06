@@ -1,0 +1,39 @@
+.Assistant {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ion-backdrop-color, #0003);
+
+  &__modal {
+    width: 80%;
+    max-width: 720px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 24px;
+
+    &-title {
+      text-align: start;
+
+      h2 {
+        color: var(--ion-text-color, #000);
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+
+    &-text {
+      padding: 24px 0;
+    }
+
+    &-action {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+}
