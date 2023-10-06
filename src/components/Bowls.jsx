@@ -13,7 +13,7 @@ import { toastSet } from '../store/sliceToast';
 function Bowls() {
     const [name, setName] = useState('');
     const [search, setSearch] = useState('');
-    const [displayByUser, setDisplayByUser] = useState(false);
+    const [displayByUser, setDisplayByUser] = useState(true);
     const [displayedBowls, setDisplayedBowls] = useState(null);
 
     const login = useSelector(state => state.login);
