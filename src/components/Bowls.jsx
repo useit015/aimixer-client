@@ -89,9 +89,9 @@ function Bowls() {
                     </IonButton>
                   }
             </IonItem>
-              <IonButton onClick={filterBowls}>
-              <IonIcon icon={person} ></IonIcon>
-            </IonButton>
+        </div>
+        <div className='Bowls__Checkbox'>
+            <ion-checkbox onInput={filterBowls} labelPlacement="start">See all bowls</ion-checkbox>
         </div>
         {!displayByUser ? 
             <div className="Bowls__List">
