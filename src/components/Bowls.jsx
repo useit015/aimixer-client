@@ -15,16 +15,18 @@ function Bowls() {
     const [search, setSearch] = useState('');
     const [displayByUser, setDisplayByUser] = useState(true);
     const [displayedBowls, setDisplayedBowls] = useState(null);
+    const [filterdBowls, setFilteredBowls] = useState(null);
 
     const login = useSelector(state => state.login);
     const bowls = useSelector(state => state.bowls);
     const servers = useSelector(state => state.servers)
-    const userBowls = bowls.filter(b => b.creator === login.email);
+    const userBowls = useSelector(state => state.bowls.filter(b => b.creator === login.email))
 
     const dispatch = useDispatch();
 
     useEffect( () => {
-      setDisplayedBowls(bowls)
+      setDisplayedBowls(bowls);
+      setFilteredBowls(userBowls);
     }, [bowls])    
 
     socketService.setupTheSocket(io, `${servers.api[servers.mode]}`, store);
@@ -39,7 +41,8 @@ function Bowls() {
    
     const handleSearch = (e) => {
       setSearch(e.target.value);
-      const filtered = bowls.filter(b => {
+      const bowlsToSearch = displayByUser ? userBowls : bowls;
+      const filtered = bowlsToSearch.filter(b => {
         const inputed = e.target.value.toLowerCase()
         const creator = b.creator.toLowerCase()
         const output = b.output.toLowerCase()
@@ -47,12 +50,14 @@ function Bowls() {
         return creator.includes(inputed) || output.includes(inputed) || name.includes(inputed) || name.replaceAll(" ", "").includes(inputed.replaceAll(" ", ""))
       })
 
-      setDisplayedBowls(filtered)
+      if (!displayByUser) setDisplayedBowls(filtered)
+      if (displayByUser) setFilteredBowls(filtered)
     }
 
     const handleSearchCancel = () => {
       setSearch("");
-      setDisplayedBowls(bowls);
+      if (!displayByUser) setDisplayedBowls(bowls)
+      if (displayByUser) setFilteredBowls(userBowls)
     }
 
     const addBowl = () => {
@@ -62,7 +67,10 @@ function Bowls() {
     }
 
     const filterBowls = () => {
+      setSearch("");
       setDisplayByUser(prev => !prev);
+      if (!displayByUser) setDisplayedBowls(bowls)
+      if (displayByUser) setFilteredBowls(userBowls)
     }
 
     if (!displayedBowls) return null;
@@ -82,7 +90,7 @@ function Bowls() {
         </div>
         <div className='Bowls__Search'>
           <IonItem className='Bowls__Search-Field'>
-                <IonInput  label={displayByUser ? "Disable user view to search" : "Search for Bowl"} labelPlacement="floating" placeholder="Type bowl name" value={search} disabled={displayByUser ? "true": "false"} onInput={handleSearch}/>
+                <IonInput  label="Search for Bowl" labelPlacement="floating" placeholder="Type bowl name" value={search} onInput={handleSearch}/>
                   {!search ? null :
                     <IonButton onClick={handleSearchCancel} className='BowlCard__FillButton' fill='outline'>
                         X
@@ -102,7 +110,7 @@ function Bowls() {
             </div>
         :
             <div className="Bowls__List">
-                { userBowls.map(b => {
+                { filterdBowls.map(b => {
                   return <BowlCard key={b.id} bowl={b} />
                 })
                 }
