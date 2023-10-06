@@ -11,6 +11,7 @@ function SearchResultCard({result}) {
 
   const fill = useSelector(state => state.fill);
   const login = useSelector(state => state.login);
+  const servers = useSelector(state => state.servers);
 
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ function SearchResultCard({result}) {
     console.log(login.accountId, fill.currentBowl, result.link);
 
     const request = {
-      url: `https://assets.aimixer.io:5002/urlToText`,
+      url: `${servers.assets[servers.mode]}/urlToText`,
       method: 'post',
       data: {
         url: result.link,
@@ -30,7 +31,7 @@ function SearchResultCard({result}) {
           markdown: true
         }
       }
-    }
+    };
 
     try {
       const response = await axios(request);
