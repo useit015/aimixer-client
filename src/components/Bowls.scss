@@ -22,11 +22,19 @@
         margin-right: 1rem;
     }
     &__Search {
-        margin-right: 4rem;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1rem;
+        &-Field {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+
     }
     &__Checkbox{
         margin-top: 1rem;
         margin-left: 1rem;
+        margin-bottom: 1rem;
     }
     &__List {
         display: flex;

@@ -6,7 +6,7 @@ import { store } from '../store/configStore';
 import * as socketService from '../socketService';
 import { IonButton, IonFab, IonFabButton, IonIcon, IonInput, IonItem } from '@ionic/react';
 import { add } from 'ionicons/icons';
-import { person } from 'ionicons/icons';
+import { basket } from 'ionicons/icons';
 import BowlCard from './BowlCard';
 import { toastSet } from '../store/sliceToast';
 
@@ -97,9 +97,12 @@ function Bowls() {
                     </IonButton>
                   }
             </IonItem>
+              <IonButton>
+              <IonIcon icon={basket} ></IonIcon>
+            </IonButton>
         </div>
         <div className='Bowls__Checkbox'>
-            <ion-checkbox onInput={filterBowls} labelPlacement="start">See all bowls</ion-checkbox>
+            <ion-checkbox onInput={filterBowls} labelPlacement="start">See all company bowls</ion-checkbox>
         </div>
         {!displayByUser ? 
             <div className="Bowls__List">
